@@ -1,4 +1,3 @@
 {
-	// npx prisma generate && npx prisma migrate deploy &&
 	"buildCommand": "next build"
 }
