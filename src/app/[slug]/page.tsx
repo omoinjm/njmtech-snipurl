@@ -1,7 +1,11 @@
-import { prisma } from '@/lib/prisma'
-import { redirect } from 'next/navigation'
+'use server';
 
-export default async function RedirectPage({ params }: { params: { slug: string } }) {
+import { prisma } from '@/lib/prisma';
+import { redirect } from 'next/navigation';
+
+type Params = Promise<{ slug: string }>
+
+export default async function RedirectPage({ params }: { params: Params }) {
   // Destructure slug from params first
   const { slug } = await params
 

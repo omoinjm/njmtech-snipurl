@@ -1,4 +1,7 @@
+'use server';
+
 // app/api/shorten/route.ts
+
 import { prisma } from '@/lib/prisma';
 import { generateSlug } from '@/lib/utils';
 import { NextRequest, NextResponse } from 'next/server';
@@ -11,6 +14,16 @@ export async function POST(req: NextRequest) {
 	// Trim whitespace from the URL
 	const trimmedUrl = url.trim();
 
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL?.replace(/\/$/, ''); // remove trailing slash
+
+	// Prevent shortening the base URL itself
+	if (url.includes(baseUrl)) {
+		return NextResponse.json(
+			{ error: 'Cannot shorten the base URL itself' },
+			{ status: 400 }
+		);
+	}
+
 	// First check if the URL already exists
 	const existingLink = await prisma.lu_short_url.findFirst({
 		where: { original: trimmedUrl },
@@ -19,7 +32,7 @@ export async function POST(req: NextRequest) {
 	// If it exists, return the existing short URL
 	if (existingLink) {
 		return NextResponse.json({
-			slug: `${process.env.NEXT_PUBLIC_BASE_URL}/${existingLink.slug}`,
+			slug: `${baseUrl}/${existingLink.slug}`,
 		});
 	}
 
@@ -31,6 +44,6 @@ export async function POST(req: NextRequest) {
 	});
 
 	return NextResponse.json({
-		slug: `${process.env.NEXT_PUBLIC_BASE_URL}/${shortLink.slug}`,
+		slug: `${baseUrl}/${shortLink.slug}`,
 	});
 }

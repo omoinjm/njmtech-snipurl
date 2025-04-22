@@ -88,8 +88,8 @@ export default function Home() {
               <div className="flex items-center gap-2">
                 <Input
                   value={shortUrl}
-                  readOnly
-                  className="flex-1 border border-orange-100/25"
+                  disabled
+                  className="flex-1 border border-orange-100/25 bg-orange-100/10 text-orange-300 cursor-not-allowed"
                 />
                 <Button
                   variant="outline"
