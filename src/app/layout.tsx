@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SnipURL - Shorten, Share, and Track Your Links",
+  title: "SnipURI - Shorten, Share, and Track Your Links",
   description: "Free URL shortener with analytics. Create short, memorable links and track their performance in real-time.",
   keywords: [
     "URL shortener",
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
   creator: "Nhlanhla Malaza",
   publisher: "NJMTECH",
   openGraph: {
-    title: "SnipURL - Shorten Links in Seconds",
+    title: "SnipURI - Shorten Links in Seconds",
     description: "The fastest way to shorten your URLs and track clicks",
-    url: "https://snipurl.vercel.app",
-    siteName: "SnipURL",
+    url: "https://snipuri.vercel.app",
+    siteName: "SnipURI",
     images: [
       {
-        url: "https://snipurl.app/og-image.jpg",
+        url: "https://snipuri.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "SnipURL - URL Shortener",
+        alt: "SnipURI - URL Shortener",
       },
     ],
     locale: "en_US",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SnipURL - Shorten Links in Seconds",
+    title: "SnipURI - Shorten Links in Seconds",
     description: "The fastest way to shorten your URLs and track clicks",
-    images: ["https://snipurl.app/twitter-image.jpg"],
+    images: ["https://snipuri.vercel.app/twitter-image.jpg"],
     creator: "@nhlanhlamalaza_",
   },
   icons: {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   // manifest: "/site.webmanifest", 
   // themeColor: "#6366f1",
-  metadataBase: new URL("https://snipurl.vercel.app"),
+  metadataBase: new URL("https://snipuri.vercel.app"),
 };
 
 export default function RootLayout({
