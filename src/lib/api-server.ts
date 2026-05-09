@@ -5,6 +5,13 @@ function getErrorMessage(error: unknown): string {
     return 'Server database is not configured. Set DATABASE_URL in production.';
   }
 
+  if (
+    error instanceof Error &&
+    error.message.includes('The column `lu_short_url.visitor_id` does not exist in the current database.')
+  ) {
+    return 'Server database schema is outdated. Run `npx prisma migrate deploy` in production and redeploy.';
+  }
+
   if (error instanceof Error && error.message) {
     return error.message;
   }
