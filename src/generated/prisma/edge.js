@@ -122,7 +122,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/omoinjm/dev/github/projects/njmtech-url-shortener/src/generated/prisma",
+      "value": "/workspaces/njmtech-snipurl/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -131,17 +131,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "debian-openssl-1.1.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/omoinjm/dev/github/projects/njmtech-url-shortener/prisma/schema.prisma",
+    "sourceFilePath": "/workspaces/njmtech-snipurl/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",

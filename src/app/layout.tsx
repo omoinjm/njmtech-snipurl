@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SnipURI - Shorten, Share, and Track Your Links",
+  title: "SnipURL — Shorten, Share, and Track Your Links",
   description: "Free URL shortener with analytics. Create short, memorable links and track their performance in real-time.",
   keywords: [
     "URL shortener",
@@ -65,7 +65,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ colorScheme: 'dark' }}>
+      <head>
+        <meta name="theme-color" content="#0a0a0a" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
