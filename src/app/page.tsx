@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckIcon, CopyIcon, ExternalLinkIcon, Link2Icon } from "@radix-ui/react-icons";
+import { CheckIcon, CopyIcon, DownloadIcon, ExternalLinkIcon, Link2Icon } from "@radix-ui/react-icons";
+import { QRCodeSVG } from "qrcode.react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const qrRef = useRef<SVGSVGElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +50,19 @@ export default function Home() {
     setCopied(true);
     toast.success("Copied to clipboard!");
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const downloadQR = () => {
+    const svg = qrRef.current;
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "qrcode.svg";
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -131,10 +146,12 @@ export default function Home() {
                 className="outline-none"
               >
                 {shortUrl && (
-                  <div className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-3 space-y-2">
+                  <div className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-3 space-y-3">
                     <p className="text-[11px] font-medium uppercase tracking-widest text-orange-400">
                       Your short link
                     </p>
+
+                    {/* URL row */}
                     <div className="flex items-center gap-2">
                       <Input
                         value={shortUrl}
@@ -165,6 +182,32 @@ export default function Home() {
                         <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
                       </a>
                     </div>
+
+                    {/* QR code */}
+                    <div className="flex flex-col items-center gap-2 pt-1">
+                      <div className="rounded-lg bg-white p-3 shadow-md shadow-black/40">
+                        <QRCodeSVG
+                          ref={qrRef}
+                          value={shortUrl}
+                          size={160}
+                          bgColor="#ffffff"
+                          fgColor="#0a0a0a"
+                          level="M"
+                          aria-label={`QR code for ${shortUrl}`}
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={downloadQR}
+                        aria-label="Download QR code as SVG"
+                        className="gap-1.5 text-xs text-zinc-500 hover:text-orange-400 hover:bg-orange-500/10"
+                      >
+                        <DownloadIcon className="h-3 w-3" aria-hidden="true" />
+                        Download QR
+                      </Button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -179,3 +222,4 @@ export default function Home() {
     </>
   );
 }
+

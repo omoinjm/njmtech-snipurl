@@ -40,6 +40,8 @@ import { PrismaClient } from "@/generated/prisma";
 
 **Server/Client split** — The home page is `'use client'` (stateful form). The `[slug]` redirect page is a Server Component (async, runs Prisma query server-side). API routes are standard Next.js Route Handlers.
 
+**QR codes** — `QRCodeSVG` from `qrcode.react` renders client-side SVG QR codes. A `ref` is forwarded to the `<svg>` element so `XMLSerializer` can serialize it for SVG download.
+
 ## Environment Variables
 
 | Variable | Purpose |
