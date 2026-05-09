@@ -7,11 +7,13 @@ import { getVisitorId } from '@/lib/visitor';
 import {
   ArrowLeftIcon,
   CheckIcon,
+  ChevronDownIcon,
   CopyIcon,
   ExternalLinkIcon,
   Link2Icon,
 } from '@radix-ui/react-icons';
 import Link from 'next/link';
+import { QRCodeSVG } from 'qrcode.react';
 import { useEffect, useState } from 'react';
 
 type LinkRecord = {
@@ -38,6 +40,7 @@ export default function HistoryPage() {
   const [links, setLinks] = useState<LinkRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
   useEffect(() => {
     const visitorId = getVisitorId();
@@ -77,6 +80,10 @@ export default function HistoryPage() {
     } catch {
       return url;
     }
+  };
+
+  const toggleExpanded = (slug: string) => {
+    setExpandedSlug((currentSlug) => currentSlug === slug ? null : slug);
   };
 
   return (
@@ -153,6 +160,12 @@ export default function HistoryPage() {
                   key={link.slug}
                   className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.03]"
                 >
+                  {(() => {
+                    const isExpanded = expandedSlug === link.slug;
+                    const panelId = `history-link-panel-${link.slug}`;
+
+                    return (
+                      <>
                   {/* Short URL row */}
                   <div className="flex items-center gap-2">
                     <Input
@@ -233,7 +246,7 @@ export default function HistoryPage() {
                     </div>
                   </a>
 
-                  <div className="mt-3 flex items-center justify-end gap-3 text-xs text-zinc-600">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex shrink-0 items-center gap-3 text-xs text-zinc-600">
                       <span aria-label={`${link.clicks} clicks`}>
                         {link.clicks.toLocaleString()}{' '}
@@ -243,7 +256,58 @@ export default function HistoryPage() {
                         {formatDate(link.created_at)}
                       </span>
                     </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => toggleExpanded(link.slug)}
+                      aria-expanded={isExpanded}
+                      aria-controls={panelId}
+                      className="gap-2 px-2 text-xs text-zinc-400 hover:bg-orange-500/10 hover:text-orange-300"
+                    >
+                      {isExpanded ? 'Hide QR code' : 'Show QR code'}
+                      <ChevronDownIcon
+                        className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        aria-hidden="true"
+                      />
+                    </Button>
                   </div>
+
+                  {isExpanded ? (
+                    <div
+                      id={panelId}
+                      className="mt-4 grid gap-4 rounded-lg border border-orange-500/15 bg-black/25 p-4 md:grid-cols-[minmax(0,1fr)_200px]"
+                    >
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-orange-400">
+                          Scan or share
+                        </p>
+                        <p className="text-sm text-zinc-300">
+                          Scan this QR code to open the short link instantly.
+                        </p>
+                        <p className="break-all text-xs text-zinc-500">
+                          {link.short_url}
+                        </p>
+                      </div>
+
+                      <div className="flex justify-center md:justify-end">
+                        <div className="rounded-xl bg-white p-3 shadow-md shadow-black/40">
+                          <QRCodeSVG
+                            value={link.short_url}
+                            size={176}
+                            bgColor="#ffffff"
+                            fgColor="#0a0a0a"
+                            level="M"
+                            includeMargin
+                            aria-label={`QR code for ${link.short_url}`}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+                      </>
+                    );
+                  })()}
                 </li>
               ))}
             </ul>
