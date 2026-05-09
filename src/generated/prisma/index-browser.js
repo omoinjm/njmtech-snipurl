@@ -122,7 +122,8 @@ exports.Prisma.Lu_short_urlScalarFieldEnum = {
   original: 'original',
   slug: 'slug',
   created_at: 'created_at',
-  clicks: 'clicks'
+  clicks: 'clicks',
+  visitor_id: 'visitor_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -133,6 +134,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

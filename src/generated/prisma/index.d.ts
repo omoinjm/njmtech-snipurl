@@ -895,6 +895,7 @@ export namespace Prisma {
     slug: string | null
     created_at: Date | null
     clicks: number | null
+    visitor_id: string | null
   }
 
   export type Lu_short_urlMaxAggregateOutputType = {
@@ -903,6 +904,7 @@ export namespace Prisma {
     slug: string | null
     created_at: Date | null
     clicks: number | null
+    visitor_id: string | null
   }
 
   export type Lu_short_urlCountAggregateOutputType = {
@@ -911,6 +913,7 @@ export namespace Prisma {
     slug: number
     created_at: number
     clicks: number
+    visitor_id: number
     _all: number
   }
 
@@ -929,6 +932,7 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
+    visitor_id?: true
   }
 
   export type Lu_short_urlMaxAggregateInputType = {
@@ -937,6 +941,7 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
+    visitor_id?: true
   }
 
   export type Lu_short_urlCountAggregateInputType = {
@@ -945,6 +950,7 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
+    visitor_id?: true
     _all?: true
   }
 
@@ -1040,6 +1046,7 @@ export namespace Prisma {
     slug: string
     created_at: Date
     clicks: number
+    visitor_id: string | null
     _count: Lu_short_urlCountAggregateOutputType | null
     _avg: Lu_short_urlAvgAggregateOutputType | null
     _sum: Lu_short_urlSumAggregateOutputType | null
@@ -1067,6 +1074,7 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
+    visitor_id?: boolean
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1075,6 +1083,7 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
+    visitor_id?: boolean
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1083,6 +1092,7 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
+    visitor_id?: boolean
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectScalar = {
@@ -1091,9 +1101,10 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
+    visitor_id?: boolean
   }
 
-  export type lu_short_urlOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "original" | "slug" | "created_at" | "clicks", ExtArgs["result"]["lu_short_url"]>
+  export type lu_short_urlOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "original" | "slug" | "created_at" | "clicks" | "visitor_id", ExtArgs["result"]["lu_short_url"]>
 
   export type $lu_short_urlPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "lu_short_url"
@@ -1104,6 +1115,7 @@ export namespace Prisma {
       slug: string
       created_at: Date
       clicks: number
+      visitor_id: string | null
     }, ExtArgs["result"]["lu_short_url"]>
     composites: {}
   }
@@ -1532,6 +1544,7 @@ export namespace Prisma {
     readonly slug: FieldRef<"lu_short_url", 'String'>
     readonly created_at: FieldRef<"lu_short_url", 'DateTime'>
     readonly clicks: FieldRef<"lu_short_url", 'Int'>
+    readonly visitor_id: FieldRef<"lu_short_url", 'String'>
   }
     
 
@@ -1917,7 +1930,8 @@ export namespace Prisma {
     original: 'original',
     slug: 'slug',
     created_at: 'created_at',
-    clicks: 'clicks'
+    clicks: 'clicks',
+    visitor_id: 'visitor_id'
   };
 
   export type Lu_short_urlScalarFieldEnum = (typeof Lu_short_urlScalarFieldEnum)[keyof typeof Lu_short_urlScalarFieldEnum]
@@ -1937,6 +1951,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2012,6 +2034,7 @@ export namespace Prisma {
     slug?: StringFilter<"lu_short_url"> | string
     created_at?: DateTimeFilter<"lu_short_url"> | Date | string
     clicks?: IntFilter<"lu_short_url"> | number
+    visitor_id?: StringNullableFilter<"lu_short_url"> | string | null
   }
 
   export type lu_short_urlOrderByWithRelationInput = {
@@ -2020,6 +2043,7 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
+    visitor_id?: SortOrderInput | SortOrder
   }
 
   export type lu_short_urlWhereUniqueInput = Prisma.AtLeast<{
@@ -2031,6 +2055,7 @@ export namespace Prisma {
     original?: StringFilter<"lu_short_url"> | string
     created_at?: DateTimeFilter<"lu_short_url"> | Date | string
     clicks?: IntFilter<"lu_short_url"> | number
+    visitor_id?: StringNullableFilter<"lu_short_url"> | string | null
   }, "id" | "slug">
 
   export type lu_short_urlOrderByWithAggregationInput = {
@@ -2039,6 +2064,7 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
+    visitor_id?: SortOrderInput | SortOrder
     _count?: lu_short_urlCountOrderByAggregateInput
     _avg?: lu_short_urlAvgOrderByAggregateInput
     _max?: lu_short_urlMaxOrderByAggregateInput
@@ -2055,6 +2081,7 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"lu_short_url"> | string
     created_at?: DateTimeWithAggregatesFilter<"lu_short_url"> | Date | string
     clicks?: IntWithAggregatesFilter<"lu_short_url"> | number
+    visitor_id?: StringNullableWithAggregatesFilter<"lu_short_url"> | string | null
   }
 
   export type lu_short_urlCreateInput = {
@@ -2063,6 +2090,7 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
+    visitor_id?: string | null
   }
 
   export type lu_short_urlUncheckedCreateInput = {
@@ -2071,6 +2099,7 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
+    visitor_id?: string | null
   }
 
   export type lu_short_urlUpdateInput = {
@@ -2079,6 +2108,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
+    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type lu_short_urlUncheckedUpdateInput = {
@@ -2087,6 +2117,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
+    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type lu_short_urlCreateManyInput = {
@@ -2095,6 +2126,7 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
+    visitor_id?: string | null
   }
 
   export type lu_short_urlUpdateManyMutationInput = {
@@ -2103,6 +2135,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
+    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type lu_short_urlUncheckedUpdateManyInput = {
@@ -2111,6 +2144,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
+    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2150,12 +2184,33 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type lu_short_urlCountOrderByAggregateInput = {
     id?: SortOrder
     original?: SortOrder
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
+    visitor_id?: SortOrder
   }
 
   export type lu_short_urlAvgOrderByAggregateInput = {
@@ -2168,6 +2223,7 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
+    visitor_id?: SortOrder
   }
 
   export type lu_short_urlMinOrderByAggregateInput = {
@@ -2176,6 +2232,7 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
+    visitor_id?: SortOrder
   }
 
   export type lu_short_urlSumOrderByAggregateInput = {
@@ -2230,6 +2287,24 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2244,6 +2319,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2280,6 +2359,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2338,6 +2431,34 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 

@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckIcon, CopyIcon, DownloadIcon, ExternalLinkIcon, Link2Icon } from "@radix-ui/react-icons";
 import { QRCodeSVG } from "qrcode.react";
+import { getVisitorId } from "@/lib/visitor";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -25,7 +27,7 @@ export default function Home() {
     try {
       const res = await fetch('/api/shorten', {
         method: 'POST',
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url, visitor_id: getVisitorId() }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -96,6 +98,12 @@ export default function Home() {
                 Shorten, share &amp; track your links
               </p>
             </div>
+            <Link
+              href="/history"
+              className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400 transition-colors hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
+            >
+              My Links
+            </Link>
           </div>
 
           {/* Card */}

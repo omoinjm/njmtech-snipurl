@@ -3,20 +3,20 @@
 // app/api/shorten/route.ts
 
 import { prisma } from '@/lib/prisma';
+import { claimUnownedUrlsForVisitor, normalizeVisitorId } from '@/lib/url-ownership';
 import { generateSlug } from '@/lib/utils';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-	const { url } = await req.json();
+	const { url, visitor_id } = await req.json();
 
 	if (!url) return NextResponse.json({ error: 'Missing URL' }, { status: 400 });
 
-	// Trim whitespace from the URL
 	const trimmedUrl = url.trim();
+	const visitorId = normalizeVisitorId(visitor_id);
 
-	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL?.replace(/\/$/, ''); // remove trailing slash
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL?.replace(/\/$/, '');
 
-	// Prevent shortening the base URL itself
 	if (url.includes(baseUrl)) {
 		return NextResponse.json(
 			{ error: 'Cannot shorten the base URL itself' },
@@ -24,26 +24,28 @@ export async function POST(req: NextRequest) {
 		);
 	}
 
-	// First check if the URL already exists
+	await claimUnownedUrlsForVisitor(visitorId);
+
 	const existingLink = await prisma.lu_short_url.findFirst({
 		where: { original: trimmedUrl },
 	});
 
-	// If it exists, return the existing short URL
 	if (existingLink) {
-		return NextResponse.json({
-			slug: `${baseUrl}/${existingLink.slug}`,
-		});
+		// Claim ownership if the record has no visitor yet
+		if (!existingLink.visitor_id && visitorId) {
+			await prisma.lu_short_url.update({
+				where: { id: existingLink.id },
+				data: { visitor_id: visitorId },
+			});
+		}
+		return NextResponse.json({ slug: `${baseUrl}/${existingLink.slug}` });
 	}
 
-	// If it doesn't exist, create a new one
 	const slug = generateSlug();
 
 	const shortLink = await prisma.lu_short_url.create({
-		data: { slug, original: trimmedUrl },
+		data: { slug, original: trimmedUrl, visitor_id: visitorId },
 	});
 
-	return NextResponse.json({
-		slug: `${baseUrl}/${shortLink.slug}`,
-	});
+	return NextResponse.json({ slug: `${baseUrl}/${shortLink.slug}` });
 }

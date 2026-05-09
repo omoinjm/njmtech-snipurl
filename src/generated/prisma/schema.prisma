@@ -20,4 +20,7 @@ model lu_short_url {
   slug       String   @unique
   created_at DateTime @default(now())
   clicks     Int      @default(0)
+  visitor_id String?
+
+  @@index([visitor_id])
 }
