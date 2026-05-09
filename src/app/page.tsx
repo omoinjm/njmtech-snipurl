@@ -4,12 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { getApiErrorMessage, parseJsonResponse } from "@/lib/api-client";
 import { CheckIcon, CopyIcon, DownloadIcon, ExternalLinkIcon, Link2Icon } from "@radix-ui/react-icons";
 import { QRCodeSVG } from "qrcode.react";
 import { getVisitorId } from "@/lib/visitor";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+
+type ShortenResponse = {
+  slug?: string;
+  error?: string;
+};
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -31,17 +37,21 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      const data = await res.json();
+      const data = await parseJsonResponse<ShortenResponse>(res);
 
       if (!res.ok) {
-        throw new Error(data.error ?? 'Failed to shorten URL');
+        throw new Error(data?.error ?? 'Failed to shorten URL');
+      }
+
+      if (!data?.slug) {
+        throw new Error('The server did not return a shortened URL.');
       }
 
       setShortUrl(data.slug);
       toast.success("URL shortened successfully!");
       setTimeout(() => resultRef.current?.focus(), 50);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Something went wrong');
+      toast.error(getApiErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -230,4 +240,3 @@ export default function Home() {
     </>
   );
 }
-

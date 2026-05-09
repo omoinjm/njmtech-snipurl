@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { getApiErrorMessage, parseJsonResponse } from '@/lib/api-client';
 import { getVisitorId } from '@/lib/visitor';
 import {
   ArrowLeftIcon,
@@ -21,6 +22,11 @@ type LinkRecord = {
   created_at: string;
 };
 
+type HistoryResponse = {
+  error?: string;
+  links?: LinkRecord[];
+};
+
 export default function HistoryPage() {
   const [links, setLinks] = useState<LinkRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,9 +35,19 @@ export default function HistoryPage() {
   useEffect(() => {
     const visitorId = getVisitorId();
     fetch(`/api/history?visitor_id=${encodeURIComponent(visitorId)}`)
-      .then((r) => r.json())
-      .then((data) => setLinks(data.links ?? []))
-      .catch(() => setLinks([]))
+      .then(async (response) => {
+        const data = await parseJsonResponse<HistoryResponse>(response);
+
+        if (!response.ok) {
+          throw new Error(data?.error ?? 'Failed to load link history');
+        }
+
+        setLinks(data?.links ?? []);
+      })
+      .catch((error) => {
+        console.error(getApiErrorMessage(error, 'Failed to load link history'));
+        setLinks([]);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
