@@ -20,6 +20,13 @@ type LinkRecord = {
   short_url: string;
   clicks: number;
   created_at: string;
+  preview: {
+    title: string;
+    description: string | null;
+    favicon_url: string | null;
+    site_name: string;
+    domain: string;
+  } | null;
 };
 
 type HistoryResponse = {
@@ -63,6 +70,14 @@ export default function HistoryPage() {
       day: 'numeric',
       year: 'numeric',
     }).format(new Date(iso));
+
+  const getLinkDomain = (url: string) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '');
+    } catch {
+      return url;
+    }
+  };
 
   return (
     <>
@@ -170,14 +185,55 @@ export default function HistoryPage() {
                     </a>
                   </div>
 
-                  {/* Original URL + meta */}
-                  <div className="mt-2 flex items-center justify-between gap-4">
-                    <p
-                      className="min-w-0 flex-1 truncate text-xs text-zinc-500"
-                      title={link.original}
-                    >
-                      {link.original}
-                    </p>
+                  <a
+                    href={link.original}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 block rounded-lg border border-white/8 bg-black/20 p-3 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5">
+                        <Link2Icon className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                        {link.preview?.favicon_url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={link.preview.favicon_url}
+                            alt=""
+                            className="absolute inset-0 h-full w-full rounded-md bg-zinc-950 p-2 object-contain"
+                            loading="lazy"
+                            onError={(event) => {
+                              event.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        ) : null}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-[11px] uppercase tracking-[0.16em] text-zinc-500">
+                          {link.preview?.site_name ?? getLinkDomain(link.original)}
+                        </p>
+                        <p
+                          className="mt-1 truncate text-sm font-medium text-zinc-100"
+                          title={link.preview?.title ?? link.original}
+                        >
+                          {link.preview?.title ?? link.original}
+                        </p>
+                        {link.preview?.description ? (
+                          <p className="mt-1 overflow-hidden text-xs leading-5 text-zinc-400 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                            {link.preview.description}
+                          </p>
+                        ) : null}
+                        <p
+                          className="mt-2 truncate text-xs text-zinc-500"
+                          title={link.original}
+                        >
+                          {link.original}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+
+                  <div className="mt-3 flex items-center justify-end gap-3 text-xs text-zinc-600">
                     <div className="flex shrink-0 items-center gap-3 text-xs text-zinc-600">
                       <span aria-label={`${link.clicks} clicks`}>
                         {link.clicks.toLocaleString()}{' '}

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { createErrorResponse, getBaseUrl } from '@/lib/api-server';
+import { getLinkPreview } from '@/lib/link-preview';
 import { claimUnownedUrlsForVisitor, normalizeVisitorId } from '@/lib/url-ownership';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -25,12 +26,30 @@ export async function GET(req: NextRequest) {
 		});
 
 		const baseUrl = getBaseUrl(req);
+		const enrichedLinks = await Promise.all(
+			links.map(async (link) => {
+				try {
+					const preview = await getLinkPreview(link.original);
+
+					return {
+						...link,
+						short_url: `${baseUrl}/${link.slug}`,
+						preview,
+					};
+				} catch (error) {
+					console.error(`Failed to load preview for ${link.original}`, error);
+
+					return {
+						...link,
+						short_url: `${baseUrl}/${link.slug}`,
+						preview: null,
+					};
+				}
+			})
+		);
 
 		return NextResponse.json({
-			links: links.map((l) => ({
-				...l,
-				short_url: `${baseUrl}/${l.slug}`,
-			})),
+			links: enrichedLinks,
 		});
 	} catch (error) {
 		return createErrorResponse(error, 'Failed to load link history');
