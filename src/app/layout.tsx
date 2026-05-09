@@ -49,13 +49,7 @@ export const metadata: Metadata = {
     images: ["https://snipuri.vercel.app/twitter-image.jpg"],
     creator: "@nhlanhlamalaza_",
   },
-  icons: {
-    icon: "https://res.cloudinary.com/dfta3fn6p/image/upload/v1676064193/public/favicon_zqeo1n.ico",
-    // shortcut: "/favicon-16x16.png",
-    // apple: "/apple-touch-icon.png",
-  },
-  // manifest: "/site.webmanifest", 
-  // themeColor: "#6366f1",
+  icons: undefined,
   metadataBase: new URL("https://snipuri.vercel.app"),
 };
 
