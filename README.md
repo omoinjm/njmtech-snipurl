@@ -20,7 +20,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 - **Database:** [PostgreSQL](https://www.postgresql.org/) with [Prisma ORM](https://www.prisma.io/)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
 - **Icons:** [Radix UI Icons](https://icons.radix-ui.com/)
-- **Shortening:** [NanoID](https://github.com/ai/nanoid)
+- **Shortening:** In-repo `generateSlug()` helper (6-character random alphanumeric slug)
 - **QR Codes:** [qrcode.react](https://zpao.github.io/qrcode.react/)
 - **Notifications:** [Sonner](https://sonner.emilkowal.ski/)
 
@@ -35,7 +35,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/njmtech-snipurl.git
+   git clone https://github.com/omoinjm/njmtech-snipurl.git
    cd njmtech-snipurl
    ```
 
@@ -45,10 +45,12 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
    ```
 
 3. **Environment Setup:**
-   Create a `.env` file in the root directory and add your database connection string:
+   Create a `.env` file in the root directory:
    ```env
    DATABASE_URL="postgresql://user:password@localhost:5432/snipurl"
+   NEXT_PUBLIC_BASE_URL="http://localhost:3000"
    ```
+   `NEXT_PUBLIC_BASE_URL` is optional. If unset, API responses fall back to the incoming request origin.
 
 4. **Database Setup:**
    Generate the Prisma client and push the schema to your database:
@@ -89,10 +91,13 @@ node scripts/backfill-visitor-history.mjs
 
 The project is configured for easy deployment on **Vercel**.
 
-The `vercel.json` includes a custom build command that handles database migrations and history backfilling automatically:
+The `vercel.json` includes a custom build command that handles Prisma client generation, history backfilling, schema push, and app build:
 ```json
-"buildCommand": "npx prisma generate && node scripts/backfill-visitor-history.mjs && npx prisma db push --accept-data-loss && next build"
+{
+  "buildCommand": "npx prisma generate && node scripts/backfill-visitor-history.mjs && npx prisma db push --accept-data-loss && next build"
+}
 ```
+`--accept-data-loss` is intentionally included for non-interactive deploys. Use it only when you understand and accept the risk that destructive schema changes can drop data.
 
 ## 📄 License
 
