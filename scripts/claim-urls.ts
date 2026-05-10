@@ -1,5 +1,5 @@
 /**
- * One-time script: assigns all unclaimed URLs (visitor_id = null) to your visitor ID.
+ * One-time script: adds all existing short URLs to a visitor's history.
  *
  * Usage:
  *   1. Open your site in the browser
@@ -25,21 +25,46 @@ async function main() {
     process.exit(1);
   }
 
-  const unclaimed = await prisma.lu_short_url.count({
-    where: { visitor_id: null },
+  await prisma.au_visitor.upsert({
+    where: { id: visitorId },
+    create: { id: visitorId },
+    update: {},
   });
 
-  if (unclaimed === 0) {
-    console.log('✓ No unclaimed URLs found — nothing to do.');
+  const [allShortUrls, existingHistory] = await Promise.all([
+    prisma.lu_short_url.findMany({
+      select: { id: true },
+    }),
+    prisma.ma_visitor_map.findMany({
+      where: { visitor_id: visitorId },
+      select: { short_url_id: true },
+    }),
+  ]);
+
+  if (allShortUrls.length === 0) {
+    console.log('✓ No short URLs found — nothing to do.');
     return;
   }
 
-  const { count } = await prisma.lu_short_url.updateMany({
-    where: { visitor_id: null },
-    data: { visitor_id: visitorId },
+  const existingIds = new Set(existingHistory.map((entry) => entry.short_url_id));
+  const historyRows = allShortUrls
+    .filter((shortUrl) => !existingIds.has(shortUrl.id))
+    .map((shortUrl) => ({
+      visitor_id: visitorId,
+      short_url_id: shortUrl.id,
+    }));
+
+  if (historyRows.length === 0) {
+    console.log(`✓ Visitor "${visitorId}" already has all URLs in history.`);
+    return;
+  }
+
+  const { count } = await prisma.ma_visitor_map.createMany({
+    data: historyRows,
+    skipDuplicates: true,
   });
 
-  console.log(`✓ Claimed ${count} URL(s) for visitor "${visitorId}"`);
+  console.log(`✓ Added ${count} URL(s) to visitor "${visitorId}" history`);
 }
 
 main()

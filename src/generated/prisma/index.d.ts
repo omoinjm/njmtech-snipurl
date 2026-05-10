@@ -18,6 +18,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type lu_short_url = $Result.DefaultSelection<Prisma.$lu_short_urlPayload>
+/**
+ * Model au_visitor
+ * 
+ */
+export type au_visitor = $Result.DefaultSelection<Prisma.$au_visitorPayload>
+/**
+ * Model ma_visitor_map
+ * 
+ */
+export type ma_visitor_map = $Result.DefaultSelection<Prisma.$ma_visitor_mapPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +163,26 @@ export class PrismaClient<
     * ```
     */
   get lu_short_url(): Prisma.lu_short_urlDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.au_visitor`: Exposes CRUD operations for the **au_visitor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Au_visitors
+    * const au_visitors = await prisma.au_visitor.findMany()
+    * ```
+    */
+  get au_visitor(): Prisma.au_visitorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ma_visitor_map`: Exposes CRUD operations for the **ma_visitor_map** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ma_visitor_maps
+    * const ma_visitor_maps = await prisma.ma_visitor_map.findMany()
+    * ```
+    */
+  get ma_visitor_map(): Prisma.ma_visitor_mapDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +623,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    lu_short_url: 'lu_short_url'
+    lu_short_url: 'lu_short_url',
+    au_visitor: 'au_visitor',
+    ma_visitor_map: 'ma_visitor_map'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "lu_short_url"
+      modelProps: "lu_short_url" | "au_visitor" | "ma_visitor_map"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +719,154 @@ export namespace Prisma {
           count: {
             args: Prisma.lu_short_urlCountArgs<ExtArgs>
             result: $Utils.Optional<Lu_short_urlCountAggregateOutputType> | number
+          }
+        }
+      }
+      au_visitor: {
+        payload: Prisma.$au_visitorPayload<ExtArgs>
+        fields: Prisma.au_visitorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.au_visitorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.au_visitorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          findFirst: {
+            args: Prisma.au_visitorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.au_visitorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          findMany: {
+            args: Prisma.au_visitorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>[]
+          }
+          create: {
+            args: Prisma.au_visitorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          createMany: {
+            args: Prisma.au_visitorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.au_visitorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>[]
+          }
+          delete: {
+            args: Prisma.au_visitorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          update: {
+            args: Prisma.au_visitorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          deleteMany: {
+            args: Prisma.au_visitorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.au_visitorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.au_visitorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>[]
+          }
+          upsert: {
+            args: Prisma.au_visitorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$au_visitorPayload>
+          }
+          aggregate: {
+            args: Prisma.Au_visitorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAu_visitor>
+          }
+          groupBy: {
+            args: Prisma.au_visitorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Au_visitorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.au_visitorCountArgs<ExtArgs>
+            result: $Utils.Optional<Au_visitorCountAggregateOutputType> | number
+          }
+        }
+      }
+      ma_visitor_map: {
+        payload: Prisma.$ma_visitor_mapPayload<ExtArgs>
+        fields: Prisma.ma_visitor_mapFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ma_visitor_mapFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ma_visitor_mapFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          findFirst: {
+            args: Prisma.ma_visitor_mapFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ma_visitor_mapFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          findMany: {
+            args: Prisma.ma_visitor_mapFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>[]
+          }
+          create: {
+            args: Prisma.ma_visitor_mapCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          createMany: {
+            args: Prisma.ma_visitor_mapCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ma_visitor_mapCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>[]
+          }
+          delete: {
+            args: Prisma.ma_visitor_mapDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          update: {
+            args: Prisma.ma_visitor_mapUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          deleteMany: {
+            args: Prisma.ma_visitor_mapDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ma_visitor_mapUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ma_visitor_mapUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>[]
+          }
+          upsert: {
+            args: Prisma.ma_visitor_mapUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ma_visitor_mapPayload>
+          }
+          aggregate: {
+            args: Prisma.Ma_visitor_mapAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMa_visitor_map>
+          }
+          groupBy: {
+            args: Prisma.ma_visitor_mapGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Ma_visitor_mapGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ma_visitor_mapCountArgs<ExtArgs>
+            result: $Utils.Optional<Ma_visitor_mapCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +955,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     lu_short_url?: lu_short_urlOmit
+    au_visitor?: au_visitorOmit
+    ma_visitor_map?: ma_visitor_mapOmit
   }
 
   /* Types for Logging */
@@ -864,6 +1046,67 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type Lu_short_urlCountOutputType
+   */
+
+  export type Lu_short_urlCountOutputType = {
+    visitor_maps: number
+  }
+
+  export type Lu_short_urlCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    visitor_maps?: boolean | Lu_short_urlCountOutputTypeCountVisitor_mapsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Lu_short_urlCountOutputType without action
+   */
+  export type Lu_short_urlCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lu_short_urlCountOutputType
+     */
+    select?: Lu_short_urlCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Lu_short_urlCountOutputType without action
+   */
+  export type Lu_short_urlCountOutputTypeCountVisitor_mapsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ma_visitor_mapWhereInput
+  }
+
+
+  /**
+   * Count Type Au_visitorCountOutputType
+   */
+
+  export type Au_visitorCountOutputType = {
+    short_urls: number
+  }
+
+  export type Au_visitorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    short_urls?: boolean | Au_visitorCountOutputTypeCountShort_urlsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Au_visitorCountOutputType without action
+   */
+  export type Au_visitorCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Au_visitorCountOutputType
+     */
+    select?: Au_visitorCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Au_visitorCountOutputType without action
+   */
+  export type Au_visitorCountOutputTypeCountShort_urlsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ma_visitor_mapWhereInput
+  }
+
 
   /**
    * Models
@@ -895,7 +1138,6 @@ export namespace Prisma {
     slug: string | null
     created_at: Date | null
     clicks: number | null
-    visitor_id: string | null
   }
 
   export type Lu_short_urlMaxAggregateOutputType = {
@@ -904,7 +1146,6 @@ export namespace Prisma {
     slug: string | null
     created_at: Date | null
     clicks: number | null
-    visitor_id: string | null
   }
 
   export type Lu_short_urlCountAggregateOutputType = {
@@ -913,7 +1154,6 @@ export namespace Prisma {
     slug: number
     created_at: number
     clicks: number
-    visitor_id: number
     _all: number
   }
 
@@ -932,7 +1172,6 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
-    visitor_id?: true
   }
 
   export type Lu_short_urlMaxAggregateInputType = {
@@ -941,7 +1180,6 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
-    visitor_id?: true
   }
 
   export type Lu_short_urlCountAggregateInputType = {
@@ -950,7 +1188,6 @@ export namespace Prisma {
     slug?: true
     created_at?: true
     clicks?: true
-    visitor_id?: true
     _all?: true
   }
 
@@ -1046,7 +1283,6 @@ export namespace Prisma {
     slug: string
     created_at: Date
     clicks: number
-    visitor_id: string | null
     _count: Lu_short_urlCountAggregateOutputType | null
     _avg: Lu_short_urlAvgAggregateOutputType | null
     _sum: Lu_short_urlSumAggregateOutputType | null
@@ -1074,7 +1310,8 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
-    visitor_id?: boolean
+    visitor_maps?: boolean | lu_short_url$visitor_mapsArgs<ExtArgs>
+    _count?: boolean | Lu_short_urlCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1083,7 +1320,6 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
-    visitor_id?: boolean
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1092,7 +1328,6 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
-    visitor_id?: boolean
   }, ExtArgs["result"]["lu_short_url"]>
 
   export type lu_short_urlSelectScalar = {
@@ -1101,21 +1336,27 @@ export namespace Prisma {
     slug?: boolean
     created_at?: boolean
     clicks?: boolean
-    visitor_id?: boolean
   }
 
-  export type lu_short_urlOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "original" | "slug" | "created_at" | "clicks" | "visitor_id", ExtArgs["result"]["lu_short_url"]>
+  export type lu_short_urlOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "original" | "slug" | "created_at" | "clicks", ExtArgs["result"]["lu_short_url"]>
+  export type lu_short_urlInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    visitor_maps?: boolean | lu_short_url$visitor_mapsArgs<ExtArgs>
+    _count?: boolean | Lu_short_urlCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type lu_short_urlIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type lu_short_urlIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $lu_short_urlPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "lu_short_url"
-    objects: {}
+    objects: {
+      visitor_maps: Prisma.$ma_visitor_mapPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       original: string
       slug: string
       created_at: Date
       clicks: number
-      visitor_id: string | null
     }, ExtArgs["result"]["lu_short_url"]>
     composites: {}
   }
@@ -1510,6 +1751,7 @@ export namespace Prisma {
    */
   export interface Prisma__lu_short_urlClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    visitor_maps<T extends lu_short_url$visitor_mapsArgs<ExtArgs> = {}>(args?: Subset<T, lu_short_url$visitor_mapsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1544,7 +1786,6 @@ export namespace Prisma {
     readonly slug: FieldRef<"lu_short_url", 'String'>
     readonly created_at: FieldRef<"lu_short_url", 'DateTime'>
     readonly clicks: FieldRef<"lu_short_url", 'Int'>
-    readonly visitor_id: FieldRef<"lu_short_url", 'String'>
   }
     
 
@@ -1561,6 +1802,10 @@ export namespace Prisma {
      * Omit specific fields from the lu_short_url
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
     /**
      * Filter, which lu_short_url to fetch.
      */
@@ -1580,6 +1825,10 @@ export namespace Prisma {
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+    /**
      * Filter, which lu_short_url to fetch.
      */
     where: lu_short_urlWhereUniqueInput
@@ -1597,6 +1846,10 @@ export namespace Prisma {
      * Omit specific fields from the lu_short_url
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
     /**
      * Filter, which lu_short_url to fetch.
      */
@@ -1646,6 +1899,10 @@ export namespace Prisma {
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+    /**
      * Filter, which lu_short_url to fetch.
      */
     where?: lu_short_urlWhereInput
@@ -1694,6 +1951,10 @@ export namespace Prisma {
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+    /**
      * Filter, which lu_short_urls to fetch.
      */
     where?: lu_short_urlWhereInput
@@ -1736,6 +1997,10 @@ export namespace Prisma {
      * Omit specific fields from the lu_short_url
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
     /**
      * The data needed to create a lu_short_url.
      */
@@ -1784,6 +2049,10 @@ export namespace Prisma {
      * Omit specific fields from the lu_short_url
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
     /**
      * The data needed to update a lu_short_url.
      */
@@ -1851,6 +2120,10 @@ export namespace Prisma {
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+    /**
      * The filter to search for the lu_short_url to update in case it exists.
      */
     where: lu_short_urlWhereUniqueInput
@@ -1877,6 +2150,10 @@ export namespace Prisma {
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+    /**
      * Filter which lu_short_url to delete.
      */
     where: lu_short_urlWhereUniqueInput
@@ -1897,6 +2174,30 @@ export namespace Prisma {
   }
 
   /**
+   * lu_short_url.visitor_maps
+   */
+  export type lu_short_url$visitor_mapsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    where?: ma_visitor_mapWhereInput
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    cursor?: ma_visitor_mapWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Ma_visitor_mapScalarFieldEnum | Ma_visitor_mapScalarFieldEnum[]
+  }
+
+  /**
    * lu_short_url without action
    */
   export type lu_short_urlDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1908,6 +2209,2107 @@ export namespace Prisma {
      * Omit specific fields from the lu_short_url
      */
     omit?: lu_short_urlOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: lu_short_urlInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model au_visitor
+   */
+
+  export type AggregateAu_visitor = {
+    _count: Au_visitorCountAggregateOutputType | null
+    _min: Au_visitorMinAggregateOutputType | null
+    _max: Au_visitorMaxAggregateOutputType | null
+  }
+
+  export type Au_visitorMinAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Au_visitorMaxAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Au_visitorCountAggregateOutputType = {
+    id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Au_visitorMinAggregateInputType = {
+    id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Au_visitorMaxAggregateInputType = {
+    id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Au_visitorCountAggregateInputType = {
+    id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Au_visitorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which au_visitor to aggregate.
+     */
+    where?: au_visitorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of au_visitors to fetch.
+     */
+    orderBy?: au_visitorOrderByWithRelationInput | au_visitorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: au_visitorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` au_visitors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` au_visitors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned au_visitors
+    **/
+    _count?: true | Au_visitorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Au_visitorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Au_visitorMaxAggregateInputType
+  }
+
+  export type GetAu_visitorAggregateType<T extends Au_visitorAggregateArgs> = {
+        [P in keyof T & keyof AggregateAu_visitor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAu_visitor[P]>
+      : GetScalarType<T[P], AggregateAu_visitor[P]>
+  }
+
+
+
+
+  export type au_visitorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: au_visitorWhereInput
+    orderBy?: au_visitorOrderByWithAggregationInput | au_visitorOrderByWithAggregationInput[]
+    by: Au_visitorScalarFieldEnum[] | Au_visitorScalarFieldEnum
+    having?: au_visitorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Au_visitorCountAggregateInputType | true
+    _min?: Au_visitorMinAggregateInputType
+    _max?: Au_visitorMaxAggregateInputType
+  }
+
+  export type Au_visitorGroupByOutputType = {
+    id: string
+    created_at: Date
+    updated_at: Date
+    _count: Au_visitorCountAggregateOutputType | null
+    _min: Au_visitorMinAggregateOutputType | null
+    _max: Au_visitorMaxAggregateOutputType | null
+  }
+
+  type GetAu_visitorGroupByPayload<T extends au_visitorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Au_visitorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Au_visitorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Au_visitorGroupByOutputType[P]>
+            : GetScalarType<T[P], Au_visitorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type au_visitorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    short_urls?: boolean | au_visitor$short_urlsArgs<ExtArgs>
+    _count?: boolean | Au_visitorCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["au_visitor"]>
+
+  export type au_visitorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["au_visitor"]>
+
+  export type au_visitorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["au_visitor"]>
+
+  export type au_visitorSelectScalar = {
+    id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type au_visitorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "updated_at", ExtArgs["result"]["au_visitor"]>
+  export type au_visitorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    short_urls?: boolean | au_visitor$short_urlsArgs<ExtArgs>
+    _count?: boolean | Au_visitorCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type au_visitorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type au_visitorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $au_visitorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "au_visitor"
+    objects: {
+      short_urls: Prisma.$ma_visitor_mapPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["au_visitor"]>
+    composites: {}
+  }
+
+  type au_visitorGetPayload<S extends boolean | null | undefined | au_visitorDefaultArgs> = $Result.GetResult<Prisma.$au_visitorPayload, S>
+
+  type au_visitorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<au_visitorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Au_visitorCountAggregateInputType | true
+    }
+
+  export interface au_visitorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['au_visitor'], meta: { name: 'au_visitor' } }
+    /**
+     * Find zero or one Au_visitor that matches the filter.
+     * @param {au_visitorFindUniqueArgs} args - Arguments to find a Au_visitor
+     * @example
+     * // Get one Au_visitor
+     * const au_visitor = await prisma.au_visitor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends au_visitorFindUniqueArgs>(args: SelectSubset<T, au_visitorFindUniqueArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Au_visitor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {au_visitorFindUniqueOrThrowArgs} args - Arguments to find a Au_visitor
+     * @example
+     * // Get one Au_visitor
+     * const au_visitor = await prisma.au_visitor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends au_visitorFindUniqueOrThrowArgs>(args: SelectSubset<T, au_visitorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Au_visitor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorFindFirstArgs} args - Arguments to find a Au_visitor
+     * @example
+     * // Get one Au_visitor
+     * const au_visitor = await prisma.au_visitor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends au_visitorFindFirstArgs>(args?: SelectSubset<T, au_visitorFindFirstArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Au_visitor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorFindFirstOrThrowArgs} args - Arguments to find a Au_visitor
+     * @example
+     * // Get one Au_visitor
+     * const au_visitor = await prisma.au_visitor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends au_visitorFindFirstOrThrowArgs>(args?: SelectSubset<T, au_visitorFindFirstOrThrowArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Au_visitors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Au_visitors
+     * const au_visitors = await prisma.au_visitor.findMany()
+     * 
+     * // Get first 10 Au_visitors
+     * const au_visitors = await prisma.au_visitor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const au_visitorWithIdOnly = await prisma.au_visitor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends au_visitorFindManyArgs>(args?: SelectSubset<T, au_visitorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Au_visitor.
+     * @param {au_visitorCreateArgs} args - Arguments to create a Au_visitor.
+     * @example
+     * // Create one Au_visitor
+     * const Au_visitor = await prisma.au_visitor.create({
+     *   data: {
+     *     // ... data to create a Au_visitor
+     *   }
+     * })
+     * 
+     */
+    create<T extends au_visitorCreateArgs>(args: SelectSubset<T, au_visitorCreateArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Au_visitors.
+     * @param {au_visitorCreateManyArgs} args - Arguments to create many Au_visitors.
+     * @example
+     * // Create many Au_visitors
+     * const au_visitor = await prisma.au_visitor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends au_visitorCreateManyArgs>(args?: SelectSubset<T, au_visitorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Au_visitors and returns the data saved in the database.
+     * @param {au_visitorCreateManyAndReturnArgs} args - Arguments to create many Au_visitors.
+     * @example
+     * // Create many Au_visitors
+     * const au_visitor = await prisma.au_visitor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Au_visitors and only return the `id`
+     * const au_visitorWithIdOnly = await prisma.au_visitor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends au_visitorCreateManyAndReturnArgs>(args?: SelectSubset<T, au_visitorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Au_visitor.
+     * @param {au_visitorDeleteArgs} args - Arguments to delete one Au_visitor.
+     * @example
+     * // Delete one Au_visitor
+     * const Au_visitor = await prisma.au_visitor.delete({
+     *   where: {
+     *     // ... filter to delete one Au_visitor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends au_visitorDeleteArgs>(args: SelectSubset<T, au_visitorDeleteArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Au_visitor.
+     * @param {au_visitorUpdateArgs} args - Arguments to update one Au_visitor.
+     * @example
+     * // Update one Au_visitor
+     * const au_visitor = await prisma.au_visitor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends au_visitorUpdateArgs>(args: SelectSubset<T, au_visitorUpdateArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Au_visitors.
+     * @param {au_visitorDeleteManyArgs} args - Arguments to filter Au_visitors to delete.
+     * @example
+     * // Delete a few Au_visitors
+     * const { count } = await prisma.au_visitor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends au_visitorDeleteManyArgs>(args?: SelectSubset<T, au_visitorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Au_visitors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Au_visitors
+     * const au_visitor = await prisma.au_visitor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends au_visitorUpdateManyArgs>(args: SelectSubset<T, au_visitorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Au_visitors and returns the data updated in the database.
+     * @param {au_visitorUpdateManyAndReturnArgs} args - Arguments to update many Au_visitors.
+     * @example
+     * // Update many Au_visitors
+     * const au_visitor = await prisma.au_visitor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Au_visitors and only return the `id`
+     * const au_visitorWithIdOnly = await prisma.au_visitor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends au_visitorUpdateManyAndReturnArgs>(args: SelectSubset<T, au_visitorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Au_visitor.
+     * @param {au_visitorUpsertArgs} args - Arguments to update or create a Au_visitor.
+     * @example
+     * // Update or create a Au_visitor
+     * const au_visitor = await prisma.au_visitor.upsert({
+     *   create: {
+     *     // ... data to create a Au_visitor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Au_visitor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends au_visitorUpsertArgs>(args: SelectSubset<T, au_visitorUpsertArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Au_visitors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorCountArgs} args - Arguments to filter Au_visitors to count.
+     * @example
+     * // Count the number of Au_visitors
+     * const count = await prisma.au_visitor.count({
+     *   where: {
+     *     // ... the filter for the Au_visitors we want to count
+     *   }
+     * })
+    **/
+    count<T extends au_visitorCountArgs>(
+      args?: Subset<T, au_visitorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Au_visitorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Au_visitor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Au_visitorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Au_visitorAggregateArgs>(args: Subset<T, Au_visitorAggregateArgs>): Prisma.PrismaPromise<GetAu_visitorAggregateType<T>>
+
+    /**
+     * Group by Au_visitor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {au_visitorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends au_visitorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: au_visitorGroupByArgs['orderBy'] }
+        : { orderBy?: au_visitorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, au_visitorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAu_visitorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the au_visitor model
+   */
+  readonly fields: au_visitorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for au_visitor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__au_visitorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    short_urls<T extends au_visitor$short_urlsArgs<ExtArgs> = {}>(args?: Subset<T, au_visitor$short_urlsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the au_visitor model
+   */
+  interface au_visitorFieldRefs {
+    readonly id: FieldRef<"au_visitor", 'String'>
+    readonly created_at: FieldRef<"au_visitor", 'DateTime'>
+    readonly updated_at: FieldRef<"au_visitor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * au_visitor findUnique
+   */
+  export type au_visitorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter, which au_visitor to fetch.
+     */
+    where: au_visitorWhereUniqueInput
+  }
+
+  /**
+   * au_visitor findUniqueOrThrow
+   */
+  export type au_visitorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter, which au_visitor to fetch.
+     */
+    where: au_visitorWhereUniqueInput
+  }
+
+  /**
+   * au_visitor findFirst
+   */
+  export type au_visitorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter, which au_visitor to fetch.
+     */
+    where?: au_visitorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of au_visitors to fetch.
+     */
+    orderBy?: au_visitorOrderByWithRelationInput | au_visitorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for au_visitors.
+     */
+    cursor?: au_visitorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` au_visitors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` au_visitors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of au_visitors.
+     */
+    distinct?: Au_visitorScalarFieldEnum | Au_visitorScalarFieldEnum[]
+  }
+
+  /**
+   * au_visitor findFirstOrThrow
+   */
+  export type au_visitorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter, which au_visitor to fetch.
+     */
+    where?: au_visitorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of au_visitors to fetch.
+     */
+    orderBy?: au_visitorOrderByWithRelationInput | au_visitorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for au_visitors.
+     */
+    cursor?: au_visitorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` au_visitors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` au_visitors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of au_visitors.
+     */
+    distinct?: Au_visitorScalarFieldEnum | Au_visitorScalarFieldEnum[]
+  }
+
+  /**
+   * au_visitor findMany
+   */
+  export type au_visitorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter, which au_visitors to fetch.
+     */
+    where?: au_visitorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of au_visitors to fetch.
+     */
+    orderBy?: au_visitorOrderByWithRelationInput | au_visitorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing au_visitors.
+     */
+    cursor?: au_visitorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` au_visitors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` au_visitors.
+     */
+    skip?: number
+    distinct?: Au_visitorScalarFieldEnum | Au_visitorScalarFieldEnum[]
+  }
+
+  /**
+   * au_visitor create
+   */
+  export type au_visitorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a au_visitor.
+     */
+    data: XOR<au_visitorCreateInput, au_visitorUncheckedCreateInput>
+  }
+
+  /**
+   * au_visitor createMany
+   */
+  export type au_visitorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many au_visitors.
+     */
+    data: au_visitorCreateManyInput | au_visitorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * au_visitor createManyAndReturn
+   */
+  export type au_visitorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * The data used to create many au_visitors.
+     */
+    data: au_visitorCreateManyInput | au_visitorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * au_visitor update
+   */
+  export type au_visitorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a au_visitor.
+     */
+    data: XOR<au_visitorUpdateInput, au_visitorUncheckedUpdateInput>
+    /**
+     * Choose, which au_visitor to update.
+     */
+    where: au_visitorWhereUniqueInput
+  }
+
+  /**
+   * au_visitor updateMany
+   */
+  export type au_visitorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update au_visitors.
+     */
+    data: XOR<au_visitorUpdateManyMutationInput, au_visitorUncheckedUpdateManyInput>
+    /**
+     * Filter which au_visitors to update
+     */
+    where?: au_visitorWhereInput
+    /**
+     * Limit how many au_visitors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * au_visitor updateManyAndReturn
+   */
+  export type au_visitorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * The data used to update au_visitors.
+     */
+    data: XOR<au_visitorUpdateManyMutationInput, au_visitorUncheckedUpdateManyInput>
+    /**
+     * Filter which au_visitors to update
+     */
+    where?: au_visitorWhereInput
+    /**
+     * Limit how many au_visitors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * au_visitor upsert
+   */
+  export type au_visitorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the au_visitor to update in case it exists.
+     */
+    where: au_visitorWhereUniqueInput
+    /**
+     * In case the au_visitor found by the `where` argument doesn't exist, create a new au_visitor with this data.
+     */
+    create: XOR<au_visitorCreateInput, au_visitorUncheckedCreateInput>
+    /**
+     * In case the au_visitor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<au_visitorUpdateInput, au_visitorUncheckedUpdateInput>
+  }
+
+  /**
+   * au_visitor delete
+   */
+  export type au_visitorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+    /**
+     * Filter which au_visitor to delete.
+     */
+    where: au_visitorWhereUniqueInput
+  }
+
+  /**
+   * au_visitor deleteMany
+   */
+  export type au_visitorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which au_visitors to delete
+     */
+    where?: au_visitorWhereInput
+    /**
+     * Limit how many au_visitors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * au_visitor.short_urls
+   */
+  export type au_visitor$short_urlsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    where?: ma_visitor_mapWhereInput
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    cursor?: ma_visitor_mapWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Ma_visitor_mapScalarFieldEnum | Ma_visitor_mapScalarFieldEnum[]
+  }
+
+  /**
+   * au_visitor without action
+   */
+  export type au_visitorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the au_visitor
+     */
+    select?: au_visitorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the au_visitor
+     */
+    omit?: au_visitorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: au_visitorInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ma_visitor_map
+   */
+
+  export type AggregateMa_visitor_map = {
+    _count: Ma_visitor_mapCountAggregateOutputType | null
+    _min: Ma_visitor_mapMinAggregateOutputType | null
+    _max: Ma_visitor_mapMaxAggregateOutputType | null
+  }
+
+  export type Ma_visitor_mapMinAggregateOutputType = {
+    id: string | null
+    visitor_id: string | null
+    short_url_id: string | null
+    created_at: Date | null
+  }
+
+  export type Ma_visitor_mapMaxAggregateOutputType = {
+    id: string | null
+    visitor_id: string | null
+    short_url_id: string | null
+    created_at: Date | null
+  }
+
+  export type Ma_visitor_mapCountAggregateOutputType = {
+    id: number
+    visitor_id: number
+    short_url_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type Ma_visitor_mapMinAggregateInputType = {
+    id?: true
+    visitor_id?: true
+    short_url_id?: true
+    created_at?: true
+  }
+
+  export type Ma_visitor_mapMaxAggregateInputType = {
+    id?: true
+    visitor_id?: true
+    short_url_id?: true
+    created_at?: true
+  }
+
+  export type Ma_visitor_mapCountAggregateInputType = {
+    id?: true
+    visitor_id?: true
+    short_url_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type Ma_visitor_mapAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ma_visitor_map to aggregate.
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ma_visitor_maps to fetch.
+     */
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ma_visitor_mapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ma_visitor_maps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ma_visitor_maps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ma_visitor_maps
+    **/
+    _count?: true | Ma_visitor_mapCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Ma_visitor_mapMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Ma_visitor_mapMaxAggregateInputType
+  }
+
+  export type GetMa_visitor_mapAggregateType<T extends Ma_visitor_mapAggregateArgs> = {
+        [P in keyof T & keyof AggregateMa_visitor_map]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMa_visitor_map[P]>
+      : GetScalarType<T[P], AggregateMa_visitor_map[P]>
+  }
+
+
+
+
+  export type ma_visitor_mapGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ma_visitor_mapWhereInput
+    orderBy?: ma_visitor_mapOrderByWithAggregationInput | ma_visitor_mapOrderByWithAggregationInput[]
+    by: Ma_visitor_mapScalarFieldEnum[] | Ma_visitor_mapScalarFieldEnum
+    having?: ma_visitor_mapScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Ma_visitor_mapCountAggregateInputType | true
+    _min?: Ma_visitor_mapMinAggregateInputType
+    _max?: Ma_visitor_mapMaxAggregateInputType
+  }
+
+  export type Ma_visitor_mapGroupByOutputType = {
+    id: string
+    visitor_id: string
+    short_url_id: string
+    created_at: Date
+    _count: Ma_visitor_mapCountAggregateOutputType | null
+    _min: Ma_visitor_mapMinAggregateOutputType | null
+    _max: Ma_visitor_mapMaxAggregateOutputType | null
+  }
+
+  type GetMa_visitor_mapGroupByPayload<T extends ma_visitor_mapGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Ma_visitor_mapGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Ma_visitor_mapGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Ma_visitor_mapGroupByOutputType[P]>
+            : GetScalarType<T[P], Ma_visitor_mapGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ma_visitor_mapSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visitor_id?: boolean
+    short_url_id?: boolean
+    created_at?: boolean
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ma_visitor_map"]>
+
+  export type ma_visitor_mapSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visitor_id?: boolean
+    short_url_id?: boolean
+    created_at?: boolean
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ma_visitor_map"]>
+
+  export type ma_visitor_mapSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visitor_id?: boolean
+    short_url_id?: boolean
+    created_at?: boolean
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ma_visitor_map"]>
+
+  export type ma_visitor_mapSelectScalar = {
+    id?: boolean
+    visitor_id?: boolean
+    short_url_id?: boolean
+    created_at?: boolean
+  }
+
+  export type ma_visitor_mapOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "visitor_id" | "short_url_id" | "created_at", ExtArgs["result"]["ma_visitor_map"]>
+  export type ma_visitor_mapInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }
+  export type ma_visitor_mapIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }
+  export type ma_visitor_mapIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    short_url?: boolean | lu_short_urlDefaultArgs<ExtArgs>
+    visitor?: boolean | au_visitorDefaultArgs<ExtArgs>
+  }
+
+  export type $ma_visitor_mapPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ma_visitor_map"
+    objects: {
+      short_url: Prisma.$lu_short_urlPayload<ExtArgs>
+      visitor: Prisma.$au_visitorPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      visitor_id: string
+      short_url_id: string
+      created_at: Date
+    }, ExtArgs["result"]["ma_visitor_map"]>
+    composites: {}
+  }
+
+  type ma_visitor_mapGetPayload<S extends boolean | null | undefined | ma_visitor_mapDefaultArgs> = $Result.GetResult<Prisma.$ma_visitor_mapPayload, S>
+
+  type ma_visitor_mapCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ma_visitor_mapFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Ma_visitor_mapCountAggregateInputType | true
+    }
+
+  export interface ma_visitor_mapDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ma_visitor_map'], meta: { name: 'ma_visitor_map' } }
+    /**
+     * Find zero or one Ma_visitor_map that matches the filter.
+     * @param {ma_visitor_mapFindUniqueArgs} args - Arguments to find a Ma_visitor_map
+     * @example
+     * // Get one Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ma_visitor_mapFindUniqueArgs>(args: SelectSubset<T, ma_visitor_mapFindUniqueArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Ma_visitor_map that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ma_visitor_mapFindUniqueOrThrowArgs} args - Arguments to find a Ma_visitor_map
+     * @example
+     * // Get one Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ma_visitor_mapFindUniqueOrThrowArgs>(args: SelectSubset<T, ma_visitor_mapFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ma_visitor_map that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapFindFirstArgs} args - Arguments to find a Ma_visitor_map
+     * @example
+     * // Get one Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ma_visitor_mapFindFirstArgs>(args?: SelectSubset<T, ma_visitor_mapFindFirstArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ma_visitor_map that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapFindFirstOrThrowArgs} args - Arguments to find a Ma_visitor_map
+     * @example
+     * // Get one Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ma_visitor_mapFindFirstOrThrowArgs>(args?: SelectSubset<T, ma_visitor_mapFindFirstOrThrowArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Ma_visitor_maps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Ma_visitor_maps
+     * const ma_visitor_maps = await prisma.ma_visitor_map.findMany()
+     * 
+     * // Get first 10 Ma_visitor_maps
+     * const ma_visitor_maps = await prisma.ma_visitor_map.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ma_visitor_mapWithIdOnly = await prisma.ma_visitor_map.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ma_visitor_mapFindManyArgs>(args?: SelectSubset<T, ma_visitor_mapFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Ma_visitor_map.
+     * @param {ma_visitor_mapCreateArgs} args - Arguments to create a Ma_visitor_map.
+     * @example
+     * // Create one Ma_visitor_map
+     * const Ma_visitor_map = await prisma.ma_visitor_map.create({
+     *   data: {
+     *     // ... data to create a Ma_visitor_map
+     *   }
+     * })
+     * 
+     */
+    create<T extends ma_visitor_mapCreateArgs>(args: SelectSubset<T, ma_visitor_mapCreateArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Ma_visitor_maps.
+     * @param {ma_visitor_mapCreateManyArgs} args - Arguments to create many Ma_visitor_maps.
+     * @example
+     * // Create many Ma_visitor_maps
+     * const ma_visitor_map = await prisma.ma_visitor_map.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ma_visitor_mapCreateManyArgs>(args?: SelectSubset<T, ma_visitor_mapCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Ma_visitor_maps and returns the data saved in the database.
+     * @param {ma_visitor_mapCreateManyAndReturnArgs} args - Arguments to create many Ma_visitor_maps.
+     * @example
+     * // Create many Ma_visitor_maps
+     * const ma_visitor_map = await prisma.ma_visitor_map.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Ma_visitor_maps and only return the `id`
+     * const ma_visitor_mapWithIdOnly = await prisma.ma_visitor_map.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ma_visitor_mapCreateManyAndReturnArgs>(args?: SelectSubset<T, ma_visitor_mapCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Ma_visitor_map.
+     * @param {ma_visitor_mapDeleteArgs} args - Arguments to delete one Ma_visitor_map.
+     * @example
+     * // Delete one Ma_visitor_map
+     * const Ma_visitor_map = await prisma.ma_visitor_map.delete({
+     *   where: {
+     *     // ... filter to delete one Ma_visitor_map
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ma_visitor_mapDeleteArgs>(args: SelectSubset<T, ma_visitor_mapDeleteArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Ma_visitor_map.
+     * @param {ma_visitor_mapUpdateArgs} args - Arguments to update one Ma_visitor_map.
+     * @example
+     * // Update one Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ma_visitor_mapUpdateArgs>(args: SelectSubset<T, ma_visitor_mapUpdateArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Ma_visitor_maps.
+     * @param {ma_visitor_mapDeleteManyArgs} args - Arguments to filter Ma_visitor_maps to delete.
+     * @example
+     * // Delete a few Ma_visitor_maps
+     * const { count } = await prisma.ma_visitor_map.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ma_visitor_mapDeleteManyArgs>(args?: SelectSubset<T, ma_visitor_mapDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ma_visitor_maps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Ma_visitor_maps
+     * const ma_visitor_map = await prisma.ma_visitor_map.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ma_visitor_mapUpdateManyArgs>(args: SelectSubset<T, ma_visitor_mapUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ma_visitor_maps and returns the data updated in the database.
+     * @param {ma_visitor_mapUpdateManyAndReturnArgs} args - Arguments to update many Ma_visitor_maps.
+     * @example
+     * // Update many Ma_visitor_maps
+     * const ma_visitor_map = await prisma.ma_visitor_map.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Ma_visitor_maps and only return the `id`
+     * const ma_visitor_mapWithIdOnly = await prisma.ma_visitor_map.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ma_visitor_mapUpdateManyAndReturnArgs>(args: SelectSubset<T, ma_visitor_mapUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Ma_visitor_map.
+     * @param {ma_visitor_mapUpsertArgs} args - Arguments to update or create a Ma_visitor_map.
+     * @example
+     * // Update or create a Ma_visitor_map
+     * const ma_visitor_map = await prisma.ma_visitor_map.upsert({
+     *   create: {
+     *     // ... data to create a Ma_visitor_map
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Ma_visitor_map we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ma_visitor_mapUpsertArgs>(args: SelectSubset<T, ma_visitor_mapUpsertArgs<ExtArgs>>): Prisma__ma_visitor_mapClient<$Result.GetResult<Prisma.$ma_visitor_mapPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Ma_visitor_maps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapCountArgs} args - Arguments to filter Ma_visitor_maps to count.
+     * @example
+     * // Count the number of Ma_visitor_maps
+     * const count = await prisma.ma_visitor_map.count({
+     *   where: {
+     *     // ... the filter for the Ma_visitor_maps we want to count
+     *   }
+     * })
+    **/
+    count<T extends ma_visitor_mapCountArgs>(
+      args?: Subset<T, ma_visitor_mapCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Ma_visitor_mapCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Ma_visitor_map.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Ma_visitor_mapAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Ma_visitor_mapAggregateArgs>(args: Subset<T, Ma_visitor_mapAggregateArgs>): Prisma.PrismaPromise<GetMa_visitor_mapAggregateType<T>>
+
+    /**
+     * Group by Ma_visitor_map.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ma_visitor_mapGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ma_visitor_mapGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ma_visitor_mapGroupByArgs['orderBy'] }
+        : { orderBy?: ma_visitor_mapGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ma_visitor_mapGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMa_visitor_mapGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ma_visitor_map model
+   */
+  readonly fields: ma_visitor_mapFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ma_visitor_map.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ma_visitor_mapClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    short_url<T extends lu_short_urlDefaultArgs<ExtArgs> = {}>(args?: Subset<T, lu_short_urlDefaultArgs<ExtArgs>>): Prisma__lu_short_urlClient<$Result.GetResult<Prisma.$lu_short_urlPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    visitor<T extends au_visitorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, au_visitorDefaultArgs<ExtArgs>>): Prisma__au_visitorClient<$Result.GetResult<Prisma.$au_visitorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ma_visitor_map model
+   */
+  interface ma_visitor_mapFieldRefs {
+    readonly id: FieldRef<"ma_visitor_map", 'String'>
+    readonly visitor_id: FieldRef<"ma_visitor_map", 'String'>
+    readonly short_url_id: FieldRef<"ma_visitor_map", 'String'>
+    readonly created_at: FieldRef<"ma_visitor_map", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ma_visitor_map findUnique
+   */
+  export type ma_visitor_mapFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter, which ma_visitor_map to fetch.
+     */
+    where: ma_visitor_mapWhereUniqueInput
+  }
+
+  /**
+   * ma_visitor_map findUniqueOrThrow
+   */
+  export type ma_visitor_mapFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter, which ma_visitor_map to fetch.
+     */
+    where: ma_visitor_mapWhereUniqueInput
+  }
+
+  /**
+   * ma_visitor_map findFirst
+   */
+  export type ma_visitor_mapFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter, which ma_visitor_map to fetch.
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ma_visitor_maps to fetch.
+     */
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ma_visitor_maps.
+     */
+    cursor?: ma_visitor_mapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ma_visitor_maps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ma_visitor_maps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ma_visitor_maps.
+     */
+    distinct?: Ma_visitor_mapScalarFieldEnum | Ma_visitor_mapScalarFieldEnum[]
+  }
+
+  /**
+   * ma_visitor_map findFirstOrThrow
+   */
+  export type ma_visitor_mapFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter, which ma_visitor_map to fetch.
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ma_visitor_maps to fetch.
+     */
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ma_visitor_maps.
+     */
+    cursor?: ma_visitor_mapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ma_visitor_maps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ma_visitor_maps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ma_visitor_maps.
+     */
+    distinct?: Ma_visitor_mapScalarFieldEnum | Ma_visitor_mapScalarFieldEnum[]
+  }
+
+  /**
+   * ma_visitor_map findMany
+   */
+  export type ma_visitor_mapFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter, which ma_visitor_maps to fetch.
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ma_visitor_maps to fetch.
+     */
+    orderBy?: ma_visitor_mapOrderByWithRelationInput | ma_visitor_mapOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ma_visitor_maps.
+     */
+    cursor?: ma_visitor_mapWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ma_visitor_maps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ma_visitor_maps.
+     */
+    skip?: number
+    distinct?: Ma_visitor_mapScalarFieldEnum | Ma_visitor_mapScalarFieldEnum[]
+  }
+
+  /**
+   * ma_visitor_map create
+   */
+  export type ma_visitor_mapCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ma_visitor_map.
+     */
+    data: XOR<ma_visitor_mapCreateInput, ma_visitor_mapUncheckedCreateInput>
+  }
+
+  /**
+   * ma_visitor_map createMany
+   */
+  export type ma_visitor_mapCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ma_visitor_maps.
+     */
+    data: ma_visitor_mapCreateManyInput | ma_visitor_mapCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ma_visitor_map createManyAndReturn
+   */
+  export type ma_visitor_mapCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * The data used to create many ma_visitor_maps.
+     */
+    data: ma_visitor_mapCreateManyInput | ma_visitor_mapCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ma_visitor_map update
+   */
+  export type ma_visitor_mapUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ma_visitor_map.
+     */
+    data: XOR<ma_visitor_mapUpdateInput, ma_visitor_mapUncheckedUpdateInput>
+    /**
+     * Choose, which ma_visitor_map to update.
+     */
+    where: ma_visitor_mapWhereUniqueInput
+  }
+
+  /**
+   * ma_visitor_map updateMany
+   */
+  export type ma_visitor_mapUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ma_visitor_maps.
+     */
+    data: XOR<ma_visitor_mapUpdateManyMutationInput, ma_visitor_mapUncheckedUpdateManyInput>
+    /**
+     * Filter which ma_visitor_maps to update
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * Limit how many ma_visitor_maps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ma_visitor_map updateManyAndReturn
+   */
+  export type ma_visitor_mapUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * The data used to update ma_visitor_maps.
+     */
+    data: XOR<ma_visitor_mapUpdateManyMutationInput, ma_visitor_mapUncheckedUpdateManyInput>
+    /**
+     * Filter which ma_visitor_maps to update
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * Limit how many ma_visitor_maps to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ma_visitor_map upsert
+   */
+  export type ma_visitor_mapUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ma_visitor_map to update in case it exists.
+     */
+    where: ma_visitor_mapWhereUniqueInput
+    /**
+     * In case the ma_visitor_map found by the `where` argument doesn't exist, create a new ma_visitor_map with this data.
+     */
+    create: XOR<ma_visitor_mapCreateInput, ma_visitor_mapUncheckedCreateInput>
+    /**
+     * In case the ma_visitor_map was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ma_visitor_mapUpdateInput, ma_visitor_mapUncheckedUpdateInput>
+  }
+
+  /**
+   * ma_visitor_map delete
+   */
+  export type ma_visitor_mapDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
+    /**
+     * Filter which ma_visitor_map to delete.
+     */
+    where: ma_visitor_mapWhereUniqueInput
+  }
+
+  /**
+   * ma_visitor_map deleteMany
+   */
+  export type ma_visitor_mapDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ma_visitor_maps to delete
+     */
+    where?: ma_visitor_mapWhereInput
+    /**
+     * Limit how many ma_visitor_maps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ma_visitor_map without action
+   */
+  export type ma_visitor_mapDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ma_visitor_map
+     */
+    select?: ma_visitor_mapSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ma_visitor_map
+     */
+    omit?: ma_visitor_mapOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ma_visitor_mapInclude<ExtArgs> | null
   }
 
 
@@ -1930,11 +4332,29 @@ export namespace Prisma {
     original: 'original',
     slug: 'slug',
     created_at: 'created_at',
-    clicks: 'clicks',
-    visitor_id: 'visitor_id'
+    clicks: 'clicks'
   };
 
   export type Lu_short_urlScalarFieldEnum = (typeof Lu_short_urlScalarFieldEnum)[keyof typeof Lu_short_urlScalarFieldEnum]
+
+
+  export const Au_visitorScalarFieldEnum: {
+    id: 'id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Au_visitorScalarFieldEnum = (typeof Au_visitorScalarFieldEnum)[keyof typeof Au_visitorScalarFieldEnum]
+
+
+  export const Ma_visitor_mapScalarFieldEnum: {
+    id: 'id',
+    visitor_id: 'visitor_id',
+    short_url_id: 'short_url_id',
+    created_at: 'created_at'
+  };
+
+  export type Ma_visitor_mapScalarFieldEnum = (typeof Ma_visitor_mapScalarFieldEnum)[keyof typeof Ma_visitor_mapScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1951,14 +4371,6 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2034,7 +4446,7 @@ export namespace Prisma {
     slug?: StringFilter<"lu_short_url"> | string
     created_at?: DateTimeFilter<"lu_short_url"> | Date | string
     clicks?: IntFilter<"lu_short_url"> | number
-    visitor_id?: StringNullableFilter<"lu_short_url"> | string | null
+    visitor_maps?: Ma_visitor_mapListRelationFilter
   }
 
   export type lu_short_urlOrderByWithRelationInput = {
@@ -2043,7 +4455,7 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
-    visitor_id?: SortOrderInput | SortOrder
+    visitor_maps?: ma_visitor_mapOrderByRelationAggregateInput
   }
 
   export type lu_short_urlWhereUniqueInput = Prisma.AtLeast<{
@@ -2055,7 +4467,7 @@ export namespace Prisma {
     original?: StringFilter<"lu_short_url"> | string
     created_at?: DateTimeFilter<"lu_short_url"> | Date | string
     clicks?: IntFilter<"lu_short_url"> | number
-    visitor_id?: StringNullableFilter<"lu_short_url"> | string | null
+    visitor_maps?: Ma_visitor_mapListRelationFilter
   }, "id" | "slug">
 
   export type lu_short_urlOrderByWithAggregationInput = {
@@ -2064,7 +4476,6 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
-    visitor_id?: SortOrderInput | SortOrder
     _count?: lu_short_urlCountOrderByAggregateInput
     _avg?: lu_short_urlAvgOrderByAggregateInput
     _max?: lu_short_urlMaxOrderByAggregateInput
@@ -2081,7 +4492,105 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"lu_short_url"> | string
     created_at?: DateTimeWithAggregatesFilter<"lu_short_url"> | Date | string
     clicks?: IntWithAggregatesFilter<"lu_short_url"> | number
-    visitor_id?: StringNullableWithAggregatesFilter<"lu_short_url"> | string | null
+  }
+
+  export type au_visitorWhereInput = {
+    AND?: au_visitorWhereInput | au_visitorWhereInput[]
+    OR?: au_visitorWhereInput[]
+    NOT?: au_visitorWhereInput | au_visitorWhereInput[]
+    id?: StringFilter<"au_visitor"> | string
+    created_at?: DateTimeFilter<"au_visitor"> | Date | string
+    updated_at?: DateTimeFilter<"au_visitor"> | Date | string
+    short_urls?: Ma_visitor_mapListRelationFilter
+  }
+
+  export type au_visitorOrderByWithRelationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    short_urls?: ma_visitor_mapOrderByRelationAggregateInput
+  }
+
+  export type au_visitorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: au_visitorWhereInput | au_visitorWhereInput[]
+    OR?: au_visitorWhereInput[]
+    NOT?: au_visitorWhereInput | au_visitorWhereInput[]
+    created_at?: DateTimeFilter<"au_visitor"> | Date | string
+    updated_at?: DateTimeFilter<"au_visitor"> | Date | string
+    short_urls?: Ma_visitor_mapListRelationFilter
+  }, "id">
+
+  export type au_visitorOrderByWithAggregationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: au_visitorCountOrderByAggregateInput
+    _max?: au_visitorMaxOrderByAggregateInput
+    _min?: au_visitorMinOrderByAggregateInput
+  }
+
+  export type au_visitorScalarWhereWithAggregatesInput = {
+    AND?: au_visitorScalarWhereWithAggregatesInput | au_visitorScalarWhereWithAggregatesInput[]
+    OR?: au_visitorScalarWhereWithAggregatesInput[]
+    NOT?: au_visitorScalarWhereWithAggregatesInput | au_visitorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"au_visitor"> | string
+    created_at?: DateTimeWithAggregatesFilter<"au_visitor"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"au_visitor"> | Date | string
+  }
+
+  export type ma_visitor_mapWhereInput = {
+    AND?: ma_visitor_mapWhereInput | ma_visitor_mapWhereInput[]
+    OR?: ma_visitor_mapWhereInput[]
+    NOT?: ma_visitor_mapWhereInput | ma_visitor_mapWhereInput[]
+    id?: StringFilter<"ma_visitor_map"> | string
+    visitor_id?: StringFilter<"ma_visitor_map"> | string
+    short_url_id?: StringFilter<"ma_visitor_map"> | string
+    created_at?: DateTimeFilter<"ma_visitor_map"> | Date | string
+    short_url?: XOR<Lu_short_urlScalarRelationFilter, lu_short_urlWhereInput>
+    visitor?: XOR<Au_visitorScalarRelationFilter, au_visitorWhereInput>
+  }
+
+  export type ma_visitor_mapOrderByWithRelationInput = {
+    id?: SortOrder
+    visitor_id?: SortOrder
+    short_url_id?: SortOrder
+    created_at?: SortOrder
+    short_url?: lu_short_urlOrderByWithRelationInput
+    visitor?: au_visitorOrderByWithRelationInput
+  }
+
+  export type ma_visitor_mapWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    visitor_id_short_url_id?: ma_visitor_mapVisitor_idShort_url_idCompoundUniqueInput
+    AND?: ma_visitor_mapWhereInput | ma_visitor_mapWhereInput[]
+    OR?: ma_visitor_mapWhereInput[]
+    NOT?: ma_visitor_mapWhereInput | ma_visitor_mapWhereInput[]
+    visitor_id?: StringFilter<"ma_visitor_map"> | string
+    short_url_id?: StringFilter<"ma_visitor_map"> | string
+    created_at?: DateTimeFilter<"ma_visitor_map"> | Date | string
+    short_url?: XOR<Lu_short_urlScalarRelationFilter, lu_short_urlWhereInput>
+    visitor?: XOR<Au_visitorScalarRelationFilter, au_visitorWhereInput>
+  }, "id" | "visitor_id_short_url_id">
+
+  export type ma_visitor_mapOrderByWithAggregationInput = {
+    id?: SortOrder
+    visitor_id?: SortOrder
+    short_url_id?: SortOrder
+    created_at?: SortOrder
+    _count?: ma_visitor_mapCountOrderByAggregateInput
+    _max?: ma_visitor_mapMaxOrderByAggregateInput
+    _min?: ma_visitor_mapMinOrderByAggregateInput
+  }
+
+  export type ma_visitor_mapScalarWhereWithAggregatesInput = {
+    AND?: ma_visitor_mapScalarWhereWithAggregatesInput | ma_visitor_mapScalarWhereWithAggregatesInput[]
+    OR?: ma_visitor_mapScalarWhereWithAggregatesInput[]
+    NOT?: ma_visitor_mapScalarWhereWithAggregatesInput | ma_visitor_mapScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ma_visitor_map"> | string
+    visitor_id?: StringWithAggregatesFilter<"ma_visitor_map"> | string
+    short_url_id?: StringWithAggregatesFilter<"ma_visitor_map"> | string
+    created_at?: DateTimeWithAggregatesFilter<"ma_visitor_map"> | Date | string
   }
 
   export type lu_short_urlCreateInput = {
@@ -2090,7 +4599,7 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
-    visitor_id?: string | null
+    visitor_maps?: ma_visitor_mapCreateNestedManyWithoutShort_urlInput
   }
 
   export type lu_short_urlUncheckedCreateInput = {
@@ -2099,7 +4608,7 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
-    visitor_id?: string | null
+    visitor_maps?: ma_visitor_mapUncheckedCreateNestedManyWithoutShort_urlInput
   }
 
   export type lu_short_urlUpdateInput = {
@@ -2108,7 +4617,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
-    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
+    visitor_maps?: ma_visitor_mapUpdateManyWithoutShort_urlNestedInput
   }
 
   export type lu_short_urlUncheckedUpdateInput = {
@@ -2117,7 +4626,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
-    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
+    visitor_maps?: ma_visitor_mapUncheckedUpdateManyWithoutShort_urlNestedInput
   }
 
   export type lu_short_urlCreateManyInput = {
@@ -2126,7 +4635,6 @@ export namespace Prisma {
     slug: string
     created_at?: Date | string
     clicks?: number
-    visitor_id?: string | null
   }
 
   export type lu_short_urlUpdateManyMutationInput = {
@@ -2135,7 +4643,6 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
-    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type lu_short_urlUncheckedUpdateManyInput = {
@@ -2144,7 +4651,99 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     clicks?: IntFieldUpdateOperationsInput | number
-    visitor_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type au_visitorCreateInput = {
+    id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    short_urls?: ma_visitor_mapCreateNestedManyWithoutVisitorInput
+  }
+
+  export type au_visitorUncheckedCreateInput = {
+    id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    short_urls?: ma_visitor_mapUncheckedCreateNestedManyWithoutVisitorInput
+  }
+
+  export type au_visitorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    short_urls?: ma_visitor_mapUpdateManyWithoutVisitorNestedInput
+  }
+
+  export type au_visitorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    short_urls?: ma_visitor_mapUncheckedUpdateManyWithoutVisitorNestedInput
+  }
+
+  export type au_visitorCreateManyInput = {
+    id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type au_visitorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type au_visitorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapCreateInput = {
+    id?: string
+    created_at?: Date | string
+    short_url: lu_short_urlCreateNestedOneWithoutVisitor_mapsInput
+    visitor: au_visitorCreateNestedOneWithoutShort_urlsInput
+  }
+
+  export type ma_visitor_mapUncheckedCreateInput = {
+    id?: string
+    visitor_id: string
+    short_url_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    short_url?: lu_short_urlUpdateOneRequiredWithoutVisitor_mapsNestedInput
+    visitor?: au_visitorUpdateOneRequiredWithoutShort_urlsNestedInput
+  }
+
+  export type ma_visitor_mapUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitor_id?: StringFieldUpdateOperationsInput | string
+    short_url_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapCreateManyInput = {
+    id?: string
+    visitor_id: string
+    short_url_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitor_id?: StringFieldUpdateOperationsInput | string
+    short_url_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2184,24 +4783,14 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type Ma_visitor_mapListRelationFilter = {
+    every?: ma_visitor_mapWhereInput
+    some?: ma_visitor_mapWhereInput
+    none?: ma_visitor_mapWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type ma_visitor_mapOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type lu_short_urlCountOrderByAggregateInput = {
@@ -2210,7 +4799,6 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
-    visitor_id?: SortOrder
   }
 
   export type lu_short_urlAvgOrderByAggregateInput = {
@@ -2223,7 +4811,6 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
-    visitor_id?: SortOrder
   }
 
   export type lu_short_urlMinOrderByAggregateInput = {
@@ -2232,7 +4819,6 @@ export namespace Prisma {
     slug?: SortOrder
     created_at?: SortOrder
     clicks?: SortOrder
-    visitor_id?: SortOrder
   }
 
   export type lu_short_urlSumOrderByAggregateInput = {
@@ -2287,22 +4873,72 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type au_visitorCountOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type au_visitorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type au_visitorMinOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type Lu_short_urlScalarRelationFilter = {
+    is?: lu_short_urlWhereInput
+    isNot?: lu_short_urlWhereInput
+  }
+
+  export type Au_visitorScalarRelationFilter = {
+    is?: au_visitorWhereInput
+    isNot?: au_visitorWhereInput
+  }
+
+  export type ma_visitor_mapVisitor_idShort_url_idCompoundUniqueInput = {
+    visitor_id: string
+    short_url_id: string
+  }
+
+  export type ma_visitor_mapCountOrderByAggregateInput = {
+    id?: SortOrder
+    visitor_id?: SortOrder
+    short_url_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ma_visitor_mapMaxOrderByAggregateInput = {
+    id?: SortOrder
+    visitor_id?: SortOrder
+    short_url_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ma_visitor_mapMinOrderByAggregateInput = {
+    id?: SortOrder
+    visitor_id?: SortOrder
+    short_url_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ma_visitor_mapCreateNestedManyWithoutShort_urlInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput> | ma_visitor_mapCreateWithoutShort_urlInput[] | ma_visitor_mapUncheckedCreateWithoutShort_urlInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutShort_urlInput | ma_visitor_mapCreateOrConnectWithoutShort_urlInput[]
+    createMany?: ma_visitor_mapCreateManyShort_urlInputEnvelope
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+  }
+
+  export type ma_visitor_mapUncheckedCreateNestedManyWithoutShort_urlInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput> | ma_visitor_mapCreateWithoutShort_urlInput[] | ma_visitor_mapUncheckedCreateWithoutShort_urlInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutShort_urlInput | ma_visitor_mapCreateOrConnectWithoutShort_urlInput[]
+    createMany?: ma_visitor_mapCreateManyShort_urlInputEnvelope
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -2321,8 +4957,102 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type ma_visitor_mapUpdateManyWithoutShort_urlNestedInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput> | ma_visitor_mapCreateWithoutShort_urlInput[] | ma_visitor_mapUncheckedCreateWithoutShort_urlInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutShort_urlInput | ma_visitor_mapCreateOrConnectWithoutShort_urlInput[]
+    upsert?: ma_visitor_mapUpsertWithWhereUniqueWithoutShort_urlInput | ma_visitor_mapUpsertWithWhereUniqueWithoutShort_urlInput[]
+    createMany?: ma_visitor_mapCreateManyShort_urlInputEnvelope
+    set?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    disconnect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    delete?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    update?: ma_visitor_mapUpdateWithWhereUniqueWithoutShort_urlInput | ma_visitor_mapUpdateWithWhereUniqueWithoutShort_urlInput[]
+    updateMany?: ma_visitor_mapUpdateManyWithWhereWithoutShort_urlInput | ma_visitor_mapUpdateManyWithWhereWithoutShort_urlInput[]
+    deleteMany?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+  }
+
+  export type ma_visitor_mapUncheckedUpdateManyWithoutShort_urlNestedInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput> | ma_visitor_mapCreateWithoutShort_urlInput[] | ma_visitor_mapUncheckedCreateWithoutShort_urlInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutShort_urlInput | ma_visitor_mapCreateOrConnectWithoutShort_urlInput[]
+    upsert?: ma_visitor_mapUpsertWithWhereUniqueWithoutShort_urlInput | ma_visitor_mapUpsertWithWhereUniqueWithoutShort_urlInput[]
+    createMany?: ma_visitor_mapCreateManyShort_urlInputEnvelope
+    set?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    disconnect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    delete?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    update?: ma_visitor_mapUpdateWithWhereUniqueWithoutShort_urlInput | ma_visitor_mapUpdateWithWhereUniqueWithoutShort_urlInput[]
+    updateMany?: ma_visitor_mapUpdateManyWithWhereWithoutShort_urlInput | ma_visitor_mapUpdateManyWithWhereWithoutShort_urlInput[]
+    deleteMany?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+  }
+
+  export type ma_visitor_mapCreateNestedManyWithoutVisitorInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput> | ma_visitor_mapCreateWithoutVisitorInput[] | ma_visitor_mapUncheckedCreateWithoutVisitorInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutVisitorInput | ma_visitor_mapCreateOrConnectWithoutVisitorInput[]
+    createMany?: ma_visitor_mapCreateManyVisitorInputEnvelope
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+  }
+
+  export type ma_visitor_mapUncheckedCreateNestedManyWithoutVisitorInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput> | ma_visitor_mapCreateWithoutVisitorInput[] | ma_visitor_mapUncheckedCreateWithoutVisitorInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutVisitorInput | ma_visitor_mapCreateOrConnectWithoutVisitorInput[]
+    createMany?: ma_visitor_mapCreateManyVisitorInputEnvelope
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+  }
+
+  export type ma_visitor_mapUpdateManyWithoutVisitorNestedInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput> | ma_visitor_mapCreateWithoutVisitorInput[] | ma_visitor_mapUncheckedCreateWithoutVisitorInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutVisitorInput | ma_visitor_mapCreateOrConnectWithoutVisitorInput[]
+    upsert?: ma_visitor_mapUpsertWithWhereUniqueWithoutVisitorInput | ma_visitor_mapUpsertWithWhereUniqueWithoutVisitorInput[]
+    createMany?: ma_visitor_mapCreateManyVisitorInputEnvelope
+    set?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    disconnect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    delete?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    update?: ma_visitor_mapUpdateWithWhereUniqueWithoutVisitorInput | ma_visitor_mapUpdateWithWhereUniqueWithoutVisitorInput[]
+    updateMany?: ma_visitor_mapUpdateManyWithWhereWithoutVisitorInput | ma_visitor_mapUpdateManyWithWhereWithoutVisitorInput[]
+    deleteMany?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+  }
+
+  export type ma_visitor_mapUncheckedUpdateManyWithoutVisitorNestedInput = {
+    create?: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput> | ma_visitor_mapCreateWithoutVisitorInput[] | ma_visitor_mapUncheckedCreateWithoutVisitorInput[]
+    connectOrCreate?: ma_visitor_mapCreateOrConnectWithoutVisitorInput | ma_visitor_mapCreateOrConnectWithoutVisitorInput[]
+    upsert?: ma_visitor_mapUpsertWithWhereUniqueWithoutVisitorInput | ma_visitor_mapUpsertWithWhereUniqueWithoutVisitorInput[]
+    createMany?: ma_visitor_mapCreateManyVisitorInputEnvelope
+    set?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    disconnect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    delete?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    connect?: ma_visitor_mapWhereUniqueInput | ma_visitor_mapWhereUniqueInput[]
+    update?: ma_visitor_mapUpdateWithWhereUniqueWithoutVisitorInput | ma_visitor_mapUpdateWithWhereUniqueWithoutVisitorInput[]
+    updateMany?: ma_visitor_mapUpdateManyWithWhereWithoutVisitorInput | ma_visitor_mapUpdateManyWithWhereWithoutVisitorInput[]
+    deleteMany?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+  }
+
+  export type lu_short_urlCreateNestedOneWithoutVisitor_mapsInput = {
+    create?: XOR<lu_short_urlCreateWithoutVisitor_mapsInput, lu_short_urlUncheckedCreateWithoutVisitor_mapsInput>
+    connectOrCreate?: lu_short_urlCreateOrConnectWithoutVisitor_mapsInput
+    connect?: lu_short_urlWhereUniqueInput
+  }
+
+  export type au_visitorCreateNestedOneWithoutShort_urlsInput = {
+    create?: XOR<au_visitorCreateWithoutShort_urlsInput, au_visitorUncheckedCreateWithoutShort_urlsInput>
+    connectOrCreate?: au_visitorCreateOrConnectWithoutShort_urlsInput
+    connect?: au_visitorWhereUniqueInput
+  }
+
+  export type lu_short_urlUpdateOneRequiredWithoutVisitor_mapsNestedInput = {
+    create?: XOR<lu_short_urlCreateWithoutVisitor_mapsInput, lu_short_urlUncheckedCreateWithoutVisitor_mapsInput>
+    connectOrCreate?: lu_short_urlCreateOrConnectWithoutVisitor_mapsInput
+    upsert?: lu_short_urlUpsertWithoutVisitor_mapsInput
+    connect?: lu_short_urlWhereUniqueInput
+    update?: XOR<XOR<lu_short_urlUpdateToOneWithWhereWithoutVisitor_mapsInput, lu_short_urlUpdateWithoutVisitor_mapsInput>, lu_short_urlUncheckedUpdateWithoutVisitor_mapsInput>
+  }
+
+  export type au_visitorUpdateOneRequiredWithoutShort_urlsNestedInput = {
+    create?: XOR<au_visitorCreateWithoutShort_urlsInput, au_visitorUncheckedCreateWithoutShort_urlsInput>
+    connectOrCreate?: au_visitorCreateOrConnectWithoutShort_urlsInput
+    upsert?: au_visitorUpsertWithoutShort_urlsInput
+    connect?: au_visitorWhereUniqueInput
+    update?: XOR<XOR<au_visitorUpdateToOneWithWhereWithoutShort_urlsInput, au_visitorUpdateWithoutShort_urlsInput>, au_visitorUncheckedUpdateWithoutShort_urlsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2359,20 +5089,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2433,32 +5149,226 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type ma_visitor_mapCreateWithoutShort_urlInput = {
+    id?: string
+    created_at?: Date | string
+    visitor: au_visitorCreateNestedOneWithoutShort_urlsInput
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type ma_visitor_mapUncheckedCreateWithoutShort_urlInput = {
+    id?: string
+    visitor_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapCreateOrConnectWithoutShort_urlInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    create: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput>
+  }
+
+  export type ma_visitor_mapCreateManyShort_urlInputEnvelope = {
+    data: ma_visitor_mapCreateManyShort_urlInput | ma_visitor_mapCreateManyShort_urlInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ma_visitor_mapUpsertWithWhereUniqueWithoutShort_urlInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    update: XOR<ma_visitor_mapUpdateWithoutShort_urlInput, ma_visitor_mapUncheckedUpdateWithoutShort_urlInput>
+    create: XOR<ma_visitor_mapCreateWithoutShort_urlInput, ma_visitor_mapUncheckedCreateWithoutShort_urlInput>
+  }
+
+  export type ma_visitor_mapUpdateWithWhereUniqueWithoutShort_urlInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    data: XOR<ma_visitor_mapUpdateWithoutShort_urlInput, ma_visitor_mapUncheckedUpdateWithoutShort_urlInput>
+  }
+
+  export type ma_visitor_mapUpdateManyWithWhereWithoutShort_urlInput = {
+    where: ma_visitor_mapScalarWhereInput
+    data: XOR<ma_visitor_mapUpdateManyMutationInput, ma_visitor_mapUncheckedUpdateManyWithoutShort_urlInput>
+  }
+
+  export type ma_visitor_mapScalarWhereInput = {
+    AND?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+    OR?: ma_visitor_mapScalarWhereInput[]
+    NOT?: ma_visitor_mapScalarWhereInput | ma_visitor_mapScalarWhereInput[]
+    id?: StringFilter<"ma_visitor_map"> | string
+    visitor_id?: StringFilter<"ma_visitor_map"> | string
+    short_url_id?: StringFilter<"ma_visitor_map"> | string
+    created_at?: DateTimeFilter<"ma_visitor_map"> | Date | string
+  }
+
+  export type ma_visitor_mapCreateWithoutVisitorInput = {
+    id?: string
+    created_at?: Date | string
+    short_url: lu_short_urlCreateNestedOneWithoutVisitor_mapsInput
+  }
+
+  export type ma_visitor_mapUncheckedCreateWithoutVisitorInput = {
+    id?: string
+    short_url_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapCreateOrConnectWithoutVisitorInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    create: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput>
+  }
+
+  export type ma_visitor_mapCreateManyVisitorInputEnvelope = {
+    data: ma_visitor_mapCreateManyVisitorInput | ma_visitor_mapCreateManyVisitorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ma_visitor_mapUpsertWithWhereUniqueWithoutVisitorInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    update: XOR<ma_visitor_mapUpdateWithoutVisitorInput, ma_visitor_mapUncheckedUpdateWithoutVisitorInput>
+    create: XOR<ma_visitor_mapCreateWithoutVisitorInput, ma_visitor_mapUncheckedCreateWithoutVisitorInput>
+  }
+
+  export type ma_visitor_mapUpdateWithWhereUniqueWithoutVisitorInput = {
+    where: ma_visitor_mapWhereUniqueInput
+    data: XOR<ma_visitor_mapUpdateWithoutVisitorInput, ma_visitor_mapUncheckedUpdateWithoutVisitorInput>
+  }
+
+  export type ma_visitor_mapUpdateManyWithWhereWithoutVisitorInput = {
+    where: ma_visitor_mapScalarWhereInput
+    data: XOR<ma_visitor_mapUpdateManyMutationInput, ma_visitor_mapUncheckedUpdateManyWithoutVisitorInput>
+  }
+
+  export type lu_short_urlCreateWithoutVisitor_mapsInput = {
+    id?: string
+    original: string
+    slug: string
+    created_at?: Date | string
+    clicks?: number
+  }
+
+  export type lu_short_urlUncheckedCreateWithoutVisitor_mapsInput = {
+    id?: string
+    original: string
+    slug: string
+    created_at?: Date | string
+    clicks?: number
+  }
+
+  export type lu_short_urlCreateOrConnectWithoutVisitor_mapsInput = {
+    where: lu_short_urlWhereUniqueInput
+    create: XOR<lu_short_urlCreateWithoutVisitor_mapsInput, lu_short_urlUncheckedCreateWithoutVisitor_mapsInput>
+  }
+
+  export type au_visitorCreateWithoutShort_urlsInput = {
+    id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type au_visitorUncheckedCreateWithoutShort_urlsInput = {
+    id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type au_visitorCreateOrConnectWithoutShort_urlsInput = {
+    where: au_visitorWhereUniqueInput
+    create: XOR<au_visitorCreateWithoutShort_urlsInput, au_visitorUncheckedCreateWithoutShort_urlsInput>
+  }
+
+  export type lu_short_urlUpsertWithoutVisitor_mapsInput = {
+    update: XOR<lu_short_urlUpdateWithoutVisitor_mapsInput, lu_short_urlUncheckedUpdateWithoutVisitor_mapsInput>
+    create: XOR<lu_short_urlCreateWithoutVisitor_mapsInput, lu_short_urlUncheckedCreateWithoutVisitor_mapsInput>
+    where?: lu_short_urlWhereInput
+  }
+
+  export type lu_short_urlUpdateToOneWithWhereWithoutVisitor_mapsInput = {
+    where?: lu_short_urlWhereInput
+    data: XOR<lu_short_urlUpdateWithoutVisitor_mapsInput, lu_short_urlUncheckedUpdateWithoutVisitor_mapsInput>
+  }
+
+  export type lu_short_urlUpdateWithoutVisitor_mapsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    original?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    clicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type lu_short_urlUncheckedUpdateWithoutVisitor_mapsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    original?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    clicks?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type au_visitorUpsertWithoutShort_urlsInput = {
+    update: XOR<au_visitorUpdateWithoutShort_urlsInput, au_visitorUncheckedUpdateWithoutShort_urlsInput>
+    create: XOR<au_visitorCreateWithoutShort_urlsInput, au_visitorUncheckedCreateWithoutShort_urlsInput>
+    where?: au_visitorWhereInput
+  }
+
+  export type au_visitorUpdateToOneWithWhereWithoutShort_urlsInput = {
+    where?: au_visitorWhereInput
+    data: XOR<au_visitorUpdateWithoutShort_urlsInput, au_visitorUncheckedUpdateWithoutShort_urlsInput>
+  }
+
+  export type au_visitorUpdateWithoutShort_urlsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type au_visitorUncheckedUpdateWithoutShort_urlsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapCreateManyShort_urlInput = {
+    id?: string
+    visitor_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapUpdateWithoutShort_urlInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    visitor?: au_visitorUpdateOneRequiredWithoutShort_urlsNestedInput
+  }
+
+  export type ma_visitor_mapUncheckedUpdateWithoutShort_urlInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitor_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapUncheckedUpdateManyWithoutShort_urlInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visitor_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapCreateManyVisitorInput = {
+    id?: string
+    short_url_id: string
+    created_at?: Date | string
+  }
+
+  export type ma_visitor_mapUpdateWithoutVisitorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    short_url?: lu_short_urlUpdateOneRequiredWithoutVisitor_mapsNestedInput
+  }
+
+  export type ma_visitor_mapUncheckedUpdateWithoutVisitorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    short_url_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ma_visitor_mapUncheckedUpdateManyWithoutVisitorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    short_url_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

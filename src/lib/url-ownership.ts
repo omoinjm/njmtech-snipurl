@@ -10,13 +10,39 @@ export function normalizeVisitorId(visitorId: unknown): string | null {
 	return trimmedVisitorId.length > 0 ? trimmedVisitorId : null;
 }
 
-export async function claimUnownedUrlsForVisitor(visitorId: string | null) {
+export async function ensureVisitor(visitorId: string | null) {
 	if (!visitorId) {
 		return;
 	}
 
-	await prisma.lu_short_url.updateMany({
-		where: { visitor_id: null },
-		data: { visitor_id: visitorId },
+	await prisma.au_visitor.upsert({
+		where: { id: visitorId },
+		create: { id: visitorId },
+		update: {},
+	});
+}
+
+export async function addShortUrlToVisitorHistory(
+	visitorId: string | null,
+	shortUrlId: string
+) {
+	if (!visitorId) {
+		return;
+	}
+
+	await ensureVisitor(visitorId);
+
+	await prisma.ma_visitor_map.upsert({
+		where: {
+			visitor_id_short_url_id: {
+				visitor_id: visitorId,
+				short_url_id: shortUrlId,
+			},
+		},
+		create: {
+			visitor_id: visitorId,
+			short_url_id: shortUrlId,
+		},
+		update: {},
 	});
 }

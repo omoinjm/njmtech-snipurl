@@ -122,8 +122,20 @@ exports.Prisma.Lu_short_urlScalarFieldEnum = {
   original: 'original',
   slug: 'slug',
   created_at: 'created_at',
-  clicks: 'clicks',
-  visitor_id: 'visitor_id'
+  clicks: 'clicks'
+};
+
+exports.Prisma.Au_visitorScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Ma_visitor_mapScalarFieldEnum = {
+  id: 'id',
+  visitor_id: 'visitor_id',
+  short_url_id: 'short_url_id',
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -136,14 +148,11 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  lu_short_url: 'lu_short_url'
+  lu_short_url: 'lu_short_url',
+  au_visitor: 'au_visitor',
+  ma_visitor_map: 'ma_visitor_map'
 };
 
 /**

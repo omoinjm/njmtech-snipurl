@@ -7,7 +7,13 @@ function getErrorMessage(error: unknown): string {
 
   if (
     error instanceof Error &&
-    error.message.includes('The column `lu_short_url.visitor_id` does not exist in the current database.')
+    (
+      error.message.includes('The column `lu_short_url.visitor_id` does not exist in the current database.') ||
+      error.message.includes('The table `public.lu_visitor` does not exist in the current database.') ||
+      error.message.includes('The table `public.lu_visitor_short_url` does not exist in the current database.') ||
+      error.message.includes('The table `public.au_visitor` does not exist in the current database.') ||
+      error.message.includes('The table `public.ma_visitor_map` does not exist in the current database.')
+    )
   ) {
     return 'Server database schema is outdated. Run `npx prisma db push` in production and redeploy.';
   }

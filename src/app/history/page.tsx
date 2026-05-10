@@ -34,17 +34,35 @@ type LinkRecord = {
 type HistoryResponse = {
   error?: string;
   links?: LinkRecord[];
+  pagination?: {
+    page: number;
+    page_size: number;
+    total_links: number;
+    total_pages: number;
+    has_previous_page: boolean;
+    has_next_page: boolean;
+  };
 };
+
+const PAGE_SIZE = 5;
 
 export default function HistoryPage() {
   const [links, setLinks] = useState<LinkRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalLinks, setTotalLinks] = useState(0);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasPreviousPage, setHasPreviousPage] = useState(false);
 
   useEffect(() => {
     const visitorId = getVisitorId();
-    fetch(`/api/history?visitor_id=${encodeURIComponent(visitorId)}`)
+    setIsLoading(true);
+    fetch(
+      `/api/history?visitor_id=${encodeURIComponent(visitorId)}&page=${currentPage}&page_size=${PAGE_SIZE}`
+    )
       .then(async (response) => {
         const data = await parseJsonResponse<HistoryResponse>(response);
 
@@ -53,13 +71,24 @@ export default function HistoryPage() {
         }
 
         setLinks(data?.links ?? []);
+        setCurrentPage(data?.pagination?.page ?? 1);
+        setTotalPages(data?.pagination?.total_pages ?? 0);
+        setTotalLinks(data?.pagination?.total_links ?? 0);
+        setHasPreviousPage(data?.pagination?.has_previous_page ?? false);
+        setHasNextPage(data?.pagination?.has_next_page ?? false);
+        setExpandedSlug(null);
       })
       .catch((error) => {
         console.error(getApiErrorMessage(error, 'Failed to load link history'));
         setLinks([]);
+        setTotalPages(0);
+        setTotalLinks(0);
+        setHasPreviousPage(false);
+        setHasNextPage(false);
+        setExpandedSlug(null);
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [currentPage]);
 
   const copyToClipboard = async (shortUrl: string, slug: string) => {
     await navigator.clipboard.writeText(shortUrl);
@@ -84,6 +113,22 @@ export default function HistoryPage() {
 
   const toggleExpanded = (slug: string) => {
     setExpandedSlug((currentSlug) => currentSlug === slug ? null : slug);
+  };
+
+  const goToPreviousPage = () => {
+    if (!hasPreviousPage || isLoading) {
+      return;
+    }
+
+    setCurrentPage((page) => Math.max(1, page - 1));
+  };
+
+  const goToNextPage = () => {
+    if (!hasNextPage || isLoading) {
+      return;
+    }
+
+    setCurrentPage((page) => page + 1);
   };
 
   return (
@@ -154,163 +199,195 @@ export default function HistoryPage() {
               </Link>
             </div>
           ) : (
-            <ul className="flex flex-col gap-3" aria-label="Your shortened links">
-              {links.map((link) => (
-                <li
-                  key={link.slug}
-                  className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.03]"
-                >
-                  {(() => {
-                    const isExpanded = expandedSlug === link.slug;
-                    const panelId = `history-link-panel-${link.slug}`;
+            <>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-500">
+                <p>
+                  Showing {links.length} of {totalLinks.toLocaleString()} links
+                </p>
+                <p>
+                  Page {currentPage} of {totalPages}
+                </p>
+              </div>
 
-                    return (
-                      <>
-                  {/* Short URL row */}
-                  <div className="flex items-center gap-2">
-                    <Input
-                      value={link.short_url}
-                      readOnly
-                      aria-label={`Short URL for ${link.original}`}
-                      className="flex-1 border-white/10 bg-transparent text-sm font-medium text-orange-300 focus-visible:ring-orange-500/20 cursor-default"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={() => copyToClipboard(link.short_url, link.slug)}
-                      aria-label={copiedSlug === link.slug ? 'Copied!' : 'Copy short URL'}
-                      className="shrink-0 border-white/10 bg-white/5 text-zinc-300 hover:bg-orange-500/10 hover:text-orange-400 hover:border-orange-500/30"
+              <ul className="flex flex-col gap-3" aria-label="Your shortened links">
+                {links.map((link) => {
+                  const isExpanded = expandedSlug === link.slug;
+                  const panelId = `history-link-panel-${link.slug}`;
+
+                  return (
+                    <li
+                      key={link.slug}
+                      className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.03]"
                     >
-                      {copiedSlug === link.slug
-                        ? <CheckIcon className="h-4 w-4" aria-hidden="true" />
-                        : <CopyIcon className="h-4 w-4" aria-hidden="true" />
-                      }
-                    </Button>
-                    <a
-                      href={link.short_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open short URL in a new tab"
-                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-zinc-300 transition-colors hover:bg-orange-500/10 hover:text-orange-400 hover:border-orange-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
-                    >
-                      <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
-                    </a>
-                  </div>
-
-                  <a
-                    href={link.original}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 block rounded-lg border border-white/8 bg-black/20 p-3 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5">
-                        <Link2Icon className="h-4 w-4 text-zinc-500" aria-hidden="true" />
-                        {link.preview?.favicon_url ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={link.preview.favicon_url}
-                            alt=""
-                            className="absolute inset-0 h-full w-full rounded-md bg-zinc-950 p-2 object-contain"
-                            loading="lazy"
-                            onError={(event) => {
-                              event.currentTarget.style.display = 'none';
-                            }}
-                          />
-                        ) : null}
-                      </div>
-
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-[11px] uppercase tracking-[0.16em] text-zinc-500">
-                          {link.preview?.site_name ?? getLinkDomain(link.original)}
-                        </p>
-                        <p
-                          className="mt-1 truncate text-sm font-medium text-zinc-100"
-                          title={link.preview?.title ?? link.original}
+                      <div className="flex items-center gap-2">
+                        <Input
+                          value={link.short_url}
+                          readOnly
+                          aria-label={`Short URL for ${link.original}`}
+                          className="cursor-default flex-1 border-white/10 bg-transparent text-sm font-medium text-orange-300 focus-visible:ring-orange-500/20"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => copyToClipboard(link.short_url, link.slug)}
+                          aria-label={copiedSlug === link.slug ? 'Copied!' : 'Copy short URL'}
+                          className="shrink-0 border-white/10 bg-white/5 text-zinc-300 hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400"
                         >
-                          {link.preview?.title ?? link.original}
-                        </p>
-                        {link.preview?.description ? (
-                          <p className="mt-1 overflow-hidden text-xs leading-5 text-zinc-400 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
-                            {link.preview.description}
-                          </p>
-                        ) : null}
-                        <p
-                          className="mt-2 truncate text-xs text-zinc-500"
-                          title={link.original}
+                          {copiedSlug === link.slug
+                            ? <CheckIcon className="h-4 w-4" aria-hidden="true" />
+                            : <CopyIcon className="h-4 w-4" aria-hidden="true" />
+                          }
+                        </Button>
+                        <a
+                          href={link.short_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Open short URL in a new tab"
+                          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5 text-zinc-300 transition-colors hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
                         >
-                          {link.original}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex shrink-0 items-center gap-3 text-xs text-zinc-600">
-                      <span aria-label={`${link.clicks} clicks`}>
-                        {link.clicks.toLocaleString()}{' '}
-                        {link.clicks === 1 ? 'click' : 'clicks'}
-                      </span>
-                      <span aria-label={`Created on ${formatDate(link.created_at)}`}>
-                        {formatDate(link.created_at)}
-                      </span>
-                    </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleExpanded(link.slug)}
-                      aria-expanded={isExpanded}
-                      aria-controls={panelId}
-                      className="gap-2 px-2 text-xs text-zinc-400 hover:bg-orange-500/10 hover:text-orange-300"
-                    >
-                      {isExpanded ? 'Hide QR code' : 'Show QR code'}
-                      <ChevronDownIcon
-                        className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                        aria-hidden="true"
-                      />
-                    </Button>
-                  </div>
-
-                  {isExpanded ? (
-                    <div
-                      id={panelId}
-                      className="mt-4 grid gap-4 rounded-lg border border-orange-500/15 bg-black/25 p-4 md:grid-cols-[minmax(0,1fr)_200px]"
-                    >
-                      <div className="space-y-2">
-                        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-orange-400">
-                          Scan or share
-                        </p>
-                        <p className="text-sm text-zinc-300">
-                          Scan this QR code to open the short link instantly.
-                        </p>
-                        <p className="break-all text-xs text-zinc-500">
-                          {link.short_url}
-                        </p>
+                          <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
+                        </a>
                       </div>
 
-                      <div className="flex justify-center md:justify-end">
-                        <div className="rounded-xl bg-white p-3 shadow-md shadow-black/40">
-                          <QRCodeSVG
-                            value={link.short_url}
-                            size={176}
-                            bgColor="#ffffff"
-                            fgColor="#0a0a0a"
-                            level="M"
-                            includeMargin
-                            aria-label={`QR code for ${link.short_url}`}
-                          />
+                      <a
+                        href={link.original}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 block rounded-lg border border-white/8 bg-black/20 p-3 transition-colors hover:border-orange-500/20 hover:bg-orange-500/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/5">
+                            <Link2Icon className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                            {link.preview?.favicon_url ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={link.preview.favicon_url}
+                                alt=""
+                                className="absolute inset-0 h-full w-full rounded-md bg-zinc-950 p-2 object-contain"
+                                loading="lazy"
+                                onError={(event) => {
+                                  event.currentTarget.style.display = 'none';
+                                }}
+                              />
+                            ) : null}
+                          </div>
+
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-[11px] uppercase tracking-[0.16em] text-zinc-500">
+                              {link.preview?.site_name ?? getLinkDomain(link.original)}
+                            </p>
+                            <p
+                              className="mt-1 truncate text-sm font-medium text-zinc-100"
+                              title={link.preview?.title ?? link.original}
+                            >
+                              {link.preview?.title ?? link.original}
+                            </p>
+                            {link.preview?.description ? (
+                              <p className="mt-1 overflow-hidden text-xs leading-5 text-zinc-400 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                                {link.preview.description}
+                              </p>
+                            ) : null}
+                            <p
+                              className="mt-2 truncate text-xs text-zinc-500"
+                              title={link.original}
+                            >
+                              {link.original}
+                            </p>
+                          </div>
                         </div>
+                      </a>
+
+                      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex shrink-0 items-center gap-3 text-xs text-zinc-600">
+                          <span aria-label={`${link.clicks} clicks`}>
+                            {link.clicks.toLocaleString()}{' '}
+                            {link.clicks === 1 ? 'click' : 'clicks'}
+                          </span>
+                          <span aria-label={`Created on ${formatDate(link.created_at)}`}>
+                            {formatDate(link.created_at)}
+                          </span>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleExpanded(link.slug)}
+                          aria-expanded={isExpanded}
+                          aria-controls={panelId}
+                          className="gap-2 px-2 text-xs text-zinc-400 hover:bg-orange-500/10 hover:text-orange-300"
+                        >
+                          {isExpanded ? 'Hide QR code' : 'Show QR code'}
+                          <ChevronDownIcon
+                            className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                            aria-hidden="true"
+                          />
+                        </Button>
                       </div>
-                    </div>
-                  ) : null}
-                      </>
-                    );
-                  })()}
-                </li>
-              ))}
-            </ul>
+
+                      {isExpanded ? (
+                        <div
+                          id={panelId}
+                          className="mt-4 grid gap-4 rounded-lg border border-orange-500/15 bg-black/25 p-4 md:grid-cols-[minmax(0,1fr)_200px]"
+                        >
+                          <div className="space-y-2">
+                            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-orange-400">
+                              Scan or share
+                            </p>
+                            <p className="text-sm text-zinc-300">
+                              Scan this QR code to open the short link instantly.
+                            </p>
+                            <p className="break-all text-xs text-zinc-500">
+                              {link.short_url}
+                            </p>
+                          </div>
+
+                          <div className="flex justify-center md:justify-end">
+                            <div className="rounded-xl bg-white p-3 shadow-md shadow-black/40">
+                              <QRCodeSVG
+                                value={link.short_url}
+                                size={176}
+                                bgColor="#ffffff"
+                                fgColor="#0a0a0a"
+                                level="M"
+                                includeMargin
+                                aria-label={`QR code for ${link.short_url}`}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {totalPages > 1 ? (
+                <div className="mt-6 flex items-center justify-between gap-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={goToPreviousPage}
+                    disabled={!hasPreviousPage || isLoading}
+                    className="border-white/10 bg-white/5 text-zinc-300 hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400 disabled:opacity-50"
+                  >
+                    Previous
+                  </Button>
+                  <p className="text-xs text-zinc-600">
+                    Page {currentPage} of {totalPages}
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={goToNextPage}
+                    disabled={!hasNextPage || isLoading}
+                    className="border-white/10 bg-white/5 text-zinc-300 hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400 disabled:opacity-50"
+                  >
+                    Next
+                  </Button>
+                </div>
+              ) : null}
+            </>
           )}
 
           {links.length > 0 && (

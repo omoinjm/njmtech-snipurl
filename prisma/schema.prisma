@@ -16,12 +16,30 @@ datasource db {
 
 
 model lu_short_url {
-  id          String   @id @default(cuid())
-  original    String
-  slug        String   @unique
-  created_at  DateTime @default(now())
-  clicks      Int      @default(0)
-  visitor_id  String?
+  id            String           @id @default(cuid())
+  original      String
+  slug          String           @unique
+  created_at    DateTime         @default(now())
+  clicks        Int              @default(0)
+  visitor_maps  ma_visitor_map[]
+}
 
-  @@index([visitor_id])
+model au_visitor {
+  id            String           @id
+  created_at    DateTime         @default(now())
+  updated_at    DateTime         @updatedAt
+  short_urls    ma_visitor_map[]
+}
+
+model ma_visitor_map {
+  id            String        @id @default(cuid())
+  visitor_id    String
+  short_url_id  String
+  created_at    DateTime      @default(now())
+  short_url     lu_short_url  @relation(fields: [short_url_id], references: [id], onDelete: Cascade)
+  visitor       au_visitor    @relation(fields: [visitor_id], references: [id], onDelete: Cascade)
+
+  @@unique([visitor_id, short_url_id])
+  @@index([visitor_id, created_at])
+  @@index([short_url_id])
 }
