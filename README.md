@@ -8,8 +8,8 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 - **Instant Shortening:** Turn long, cumbersome URLs into short, shareable links.
 - **QR Code Generation:** Every shortened URL comes with a downloadable SVG QR code.
-- **Personal History:** Keep track of all the links you've shortened with a local-first history page.
-- **Visitor Tracking:** Anonymous tracking via `visitor_id` stored in local storage.
+- **Personal History:** Keep track of all the links you've shortened with visitor-based history backed by the database.
+- **Visitor Tracking:** Anonymous tracking via a `visitor_id` stored in local storage and used to look up your history.
 - **Modern Aesthetic:** A dark-themed, responsive UI built with Tailwind CSS 4 and shadcn/ui.
 - **Accessible:** Built with accessibility in mind, including keyboard navigation and skip links.
 
