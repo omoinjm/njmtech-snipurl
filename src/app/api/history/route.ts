@@ -12,10 +12,17 @@ function parsePositiveInt(value: string | null, fallback: number) {
 	return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function normalizeSearchTerm(value: string | null) {
+	const trimmedValue = value?.trim() ?? '';
+
+	return trimmedValue.length > 0 ? trimmedValue : null;
+}
+
 export async function GET(req: NextRequest) {
 	try {
 		const visitorId = normalizeVisitorId(req.nextUrl.searchParams.get('visitor_id'));
 		const requestedPage = parsePositiveInt(req.nextUrl.searchParams.get('page'), 1);
+		const searchTerm = normalizeSearchTerm(req.nextUrl.searchParams.get('search'));
 		const pageSize = parsePositiveInt(
 			req.nextUrl.searchParams.get('page_size'),
 			DEFAULT_PAGE_SIZE
@@ -35,15 +42,29 @@ export async function GET(req: NextRequest) {
 			});
 		}
 
+		const where = {
+			visitor_id: visitorId,
+			...(searchTerm
+				? {
+						short_url: {
+							OR: [
+								{ original: { contains: searchTerm, mode: 'insensitive' as const } },
+								{ slug: { contains: searchTerm, mode: 'insensitive' as const } },
+							],
+						},
+					}
+				: {}),
+		};
+
 		const totalLinks = await prisma.ma_visitor_map.count({
-			where: { visitor_id: visitorId },
+			where,
 		});
 		const totalPages = totalLinks === 0 ? 0 : Math.ceil(totalLinks / pageSize);
 		const page = totalPages === 0 ? 1 : Math.min(requestedPage, totalPages);
 		const skip = totalPages === 0 ? 0 : (page - 1) * pageSize;
 
 		const links = await prisma.ma_visitor_map.findMany({
-			where: { visitor_id: visitorId },
+			where,
 			orderBy: { created_at: 'desc' },
 			skip,
 			take: pageSize,

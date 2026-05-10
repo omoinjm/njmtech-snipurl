@@ -10,6 +10,7 @@ import {
   ChevronDownIcon,
   CopyIcon,
   ExternalLinkIcon,
+  InfoCircledIcon,
   Link2Icon,
 } from '@radix-ui/react-icons';
 import Link from 'next/link';
@@ -56,12 +57,24 @@ export default function HistoryPage() {
   const [totalLinks, setTotalLinks] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [hasPreviousPage, setHasPreviousPage] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      const nextQuery = searchInput.trim();
+      setCurrentPage(1);
+      setSearchQuery(nextQuery);
+    }, 250);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [searchInput]);
 
   useEffect(() => {
     const visitorId = getVisitorId();
     setIsLoading(true);
     fetch(
-      `/api/history?visitor_id=${encodeURIComponent(visitorId)}&page=${currentPage}&page_size=${PAGE_SIZE}`
+      `/api/history?visitor_id=${encodeURIComponent(visitorId)}&page=${currentPage}&page_size=${PAGE_SIZE}&search=${encodeURIComponent(searchQuery)}`
     )
       .then(async (response) => {
         const data = await parseJsonResponse<HistoryResponse>(response);
@@ -88,7 +101,7 @@ export default function HistoryPage() {
         setExpandedSlug(null);
       })
       .finally(() => setIsLoading(false));
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   const copyToClipboard = async (shortUrl: string, slug: string) => {
     await navigator.clipboard.writeText(shortUrl);
@@ -165,6 +178,32 @@ export default function HistoryPage() {
           </div>
 
           {/* Content */}
+          <div className="mb-4">
+            <div className="mb-2 flex items-center gap-2 text-xs text-zinc-500">
+              <span>Search your links</span>
+              <span className="group relative inline-flex">
+                <button
+                  type="button"
+                  aria-label="Search help"
+                  className="inline-flex h-4 w-4 items-center justify-center rounded-full text-zinc-500 transition-colors hover:text-orange-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/40"
+                >
+                  <InfoCircledIcon className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 hidden w-56 -translate-x-1/2 rounded-md border border-white/10 bg-zinc-950 px-3 py-2 text-left text-[11px] leading-5 text-zinc-300 shadow-lg shadow-black/50 group-hover:block group-focus-within:block">
+                  Search by original URL or by the short code in your SnipURL link.
+                </span>
+              </span>
+            </div>
+            <Input
+              type="search"
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+              placeholder="Search by original URL or short code"
+              aria-label="Search your links"
+              className="border-white/10 bg-white/[0.03] text-sm text-white placeholder:text-zinc-600 focus-visible:border-orange-500 focus-visible:ring-orange-500/20"
+            />
+          </div>
+
           {isLoading ? (
             <div
               className="flex flex-col gap-3"
@@ -187,16 +226,31 @@ export default function HistoryPage() {
                 <Link2Icon className="h-6 w-6 text-zinc-600" />
               </div>
               <div>
-                <p className="font-medium text-zinc-300">No links yet</p>
+                <p className="font-medium text-zinc-300">
+                  {searchQuery ? 'No matching links' : 'No links yet'}
+                </p>
                 <p className="mt-1 text-sm text-zinc-600">
-                  Links you shorten will appear here
+                  {searchQuery
+                    ? 'Try a different URL or short code search'
+                    : 'Links you shorten will appear here'}
                 </p>
               </div>
-              <Link href="/">
-                <Button className="bg-orange-600 text-white hover:bg-orange-500">
-                  Shorten your first URL
+              {searchQuery ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setSearchInput('')}
+                  className="border-white/10 bg-white/5 text-white hover:bg-orange-500/10 hover:text-orange-300"
+                >
+                  Clear search
                 </Button>
-              </Link>
+              ) : (
+                <Link href="/">
+                  <Button className="bg-orange-600 text-white hover:bg-orange-500">
+                    Shorten your first URL
+                  </Button>
+                </Link>
+              )}
             </div>
           ) : (
             <>
