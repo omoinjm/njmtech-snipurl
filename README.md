@@ -99,6 +99,8 @@ The `vercel.json` includes a custom build command that handles Prisma client gen
 ```
 `--accept-data-loss` is intentionally included for non-interactive deploys. Use it only when you understand and accept the risk that destructive schema changes can drop data.
 
+> **Warning:** `prisma db push --accept-data-loss` can apply destructive schema changes and may drop data. Keep this only if your deployment workflow intentionally allows data-lossing schema updates, and make sure you have backups or another recovery plan before using it against a populated database.
+
 ## 📄 License
 
 This repository does not currently include a license file. Until a license is explicitly added, all rights are reserved.
