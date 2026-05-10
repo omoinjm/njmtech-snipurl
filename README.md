@@ -96,4 +96,4 @@ The `vercel.json` includes a custom build command that handles database migratio
 
 ## 📄 License
 
-This project is open-source and available under the MIT License.
+This repository does not currently include a license file. Until a license is explicitly added, all rights are reserved.
