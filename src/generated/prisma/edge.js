@@ -148,6 +148,10 @@ const config = {
         "fromEnvVar": null,
         "value": "debian-openssl-1.1.x",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -173,8 +177,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel lu_short_url {\n  id           String           @id @default(cuid())\n  original     String\n  slug         String           @unique\n  created_at   DateTime         @default(now())\n  clicks       Int              @default(0)\n  visitor_maps ma_visitor_map[]\n}\n\nmodel au_visitor {\n  id         String           @id\n  created_at DateTime         @default(now())\n  updated_at DateTime         @updatedAt\n  short_urls ma_visitor_map[]\n}\n\nmodel ma_visitor_map {\n  id           String       @id @default(cuid())\n  visitor_id   String\n  short_url_id String\n  created_at   DateTime     @default(now())\n  short_url    lu_short_url @relation(fields: [short_url_id], references: [id], onDelete: Cascade)\n  visitor      au_visitor   @relation(fields: [visitor_id], references: [id], onDelete: Cascade)\n\n  @@unique([visitor_id, short_url_id])\n  @@index([visitor_id, created_at])\n  @@index([short_url_id])\n}\n",
-  "inlineSchemaHash": "c7384a404ffd3a6372643fb18c3e87d34d1b6a33dd6fece58f7e9f16cbd32b2e",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel lu_short_url {\n  id           String           @id @default(cuid())\n  original     String\n  slug         String           @unique\n  created_at   DateTime         @default(now())\n  clicks       Int              @default(0)\n  visitor_maps ma_visitor_map[]\n}\n\nmodel au_visitor {\n  id         String           @id\n  created_at DateTime         @default(now())\n  updated_at DateTime         @updatedAt\n  short_urls ma_visitor_map[]\n}\n\nmodel ma_visitor_map {\n  id           String       @id @default(cuid())\n  visitor_id   String\n  short_url_id String\n  created_at   DateTime     @default(now())\n  short_url    lu_short_url @relation(fields: [short_url_id], references: [id], onDelete: Cascade)\n  visitor      au_visitor   @relation(fields: [visitor_id], references: [id], onDelete: Cascade)\n\n  @@unique([visitor_id, short_url_id])\n  @@index([visitor_id, created_at])\n  @@index([short_url_id])\n}\n",
+  "inlineSchemaHash": "42d505e306d69a8adbfe75ae72e0ec023662a6cc64ce9b10ab0fd9d21a424aa1",
   "copyEngine": true
 }
 config.dirname = '/'
