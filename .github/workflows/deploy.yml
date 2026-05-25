@@ -32,9 +32,11 @@ jobs:
       - name: Build Next.js
         run: npm run build
         env:
-          # Add any build-time env vars here
-          DATABASE_URL: "file:./dev.db" # Dummy for build step
+          DATABASE_URL: "file:./dev.db"
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+
+      - name: List Build Output
+        run: ls -la .next
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
