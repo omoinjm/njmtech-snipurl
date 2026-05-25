@@ -1,3 +1,3 @@
 {
-	"buildCommand": "npx prisma generate && node scripts/backfill-visitor-history.mjs && npx prisma db push --accept-data-loss && next build"
+	"buildCommand": "next build"
 }
