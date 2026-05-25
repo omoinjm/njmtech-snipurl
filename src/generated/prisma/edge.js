@@ -83,9 +83,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -115,11 +112,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
 
 exports.Prisma.ModelName = {
   lu_short_url: 'lu_short_url',
@@ -137,7 +129,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/workspaces/njmtech-snipurl/src/generated/prisma",
+      "value": "/home/omoinjm/Documents/dev/github/projects/njmtech-snipurl/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -146,16 +138,14 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-1.1.x",
+        "value": "debian-openssl-3.0.x",
         "native": true
-      },
-      {
-        "fromEnvVar": null,
-        "value": "rhel-openssl-3.0.x"
       }
     ],
-    "previewFeatures": [],
-    "sourceFilePath": "/workspaces/njmtech-snipurl/prisma/schema.prisma",
+    "previewFeatures": [
+      "driverAdapters"
+    ],
+    "sourceFilePath": "/home/omoinjm/Documents/dev/github/projects/njmtech-snipurl/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -167,18 +157,18 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "postgresql",
+  "activeProvider": "sqlite",
   "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "file:./dev.db"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel lu_short_url {\n  id           String           @id @default(cuid())\n  original     String\n  slug         String           @unique\n  created_at   DateTime         @default(now())\n  clicks       Int              @default(0)\n  visitor_maps ma_visitor_map[]\n}\n\nmodel au_visitor {\n  id         String           @id\n  created_at DateTime         @default(now())\n  updated_at DateTime         @updatedAt\n  short_urls ma_visitor_map[]\n}\n\nmodel ma_visitor_map {\n  id           String       @id @default(cuid())\n  visitor_id   String\n  short_url_id String\n  created_at   DateTime     @default(now())\n  short_url    lu_short_url @relation(fields: [short_url_id], references: [id], onDelete: Cascade)\n  visitor      au_visitor   @relation(fields: [visitor_id], references: [id], onDelete: Cascade)\n\n  @@unique([visitor_id, short_url_id])\n  @@index([visitor_id, created_at])\n  @@index([short_url_id])\n}\n",
-  "inlineSchemaHash": "42d505e306d69a8adbfe75ae72e0ec023662a6cc64ce9b10ab0fd9d21a424aa1",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../src/generated/prisma\"\n  previewFeatures = [\"driverAdapters\"]\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./dev.db\"\n}\n\nmodel lu_short_url {\n  id           String           @id @default(cuid())\n  original     String\n  slug         String           @unique\n  created_at   DateTime         @default(now())\n  clicks       Int              @default(0)\n  visitor_maps ma_visitor_map[]\n}\n\nmodel au_visitor {\n  id         String           @id\n  created_at DateTime         @default(now())\n  updated_at DateTime         @updatedAt\n  short_urls ma_visitor_map[]\n}\n\nmodel ma_visitor_map {\n  id           String       @id @default(cuid())\n  visitor_id   String\n  short_url_id String\n  created_at   DateTime     @default(now())\n  short_url    lu_short_url @relation(fields: [short_url_id], references: [id], onDelete: Cascade)\n  visitor      au_visitor   @relation(fields: [visitor_id], references: [id], onDelete: Cascade)\n\n  @@unique([visitor_id, short_url_id])\n  @@index([visitor_id, created_at])\n  @@index([short_url_id])\n}\n",
+  "inlineSchemaHash": "4b851a863051f153d36c8958e924e00cbf9e384fbeb5b5e8ecb948a53d024909",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -189,9 +179,7 @@ config.engineWasm = undefined
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {

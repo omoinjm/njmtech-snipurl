@@ -17,7 +17,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Database:** [PostgreSQL](https://www.postgresql.org/) with [Prisma ORM](https://www.prisma.io/)
+- **Database:** [Cloudflare D1](https://developers.cloudflare.com/d1/) (SQLite) with [Prisma ORM](https://www.prisma.io/)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
 - **Icons:** [Radix UI Icons](https://icons.radix-ui.com/)
 - **Shortening:** [NanoID](https://github.com/ai/nanoid)
@@ -29,7 +29,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 ### Prerequisites
 
 - Node.js 20+ (recommended)
-- A PostgreSQL database instance
+- Cloudflare account (for D1)
 
 ### Installation
 
@@ -45,13 +45,13 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
    ```
 
 3. **Environment Setup:**
-   Create a `.env` file in the root directory and add your database connection string:
+   Create a `.env` file in the root directory:
    ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/snipurl"
+   DATABASE_URL="file:./dev.db"
    ```
 
-4. **Database Setup:**
-   Generate the Prisma client and push the schema to your database:
+4. **Database Setup (Local):**
+   Generate the Prisma client and push the schema to your local SQLite database:
    ```bash
    npx prisma generate
    npx prisma db push
@@ -80,19 +80,36 @@ Associate all existing short URLs in the database with your current browser's vi
    ```
 
 ### Backfill Visitor History
-Used during deployment to ensure all existing URLs have a valid visitor mapping.
+Used during migration to ensure all existing URLs have a valid visitor mapping.
 ```bash
 node scripts/backfill-visitor-history.mjs
 ```
 
 ## 🌐 Deployment
 
-The project is configured for easy deployment on **Vercel**.
+The project is configured for deployment on **Cloudflare Pages**.
 
-The `vercel.json` includes a custom build command that handles database migrations and history backfilling automatically:
-```json
-"buildCommand": "npx prisma generate && node scripts/backfill-visitor-history.mjs && npx prisma db push --accept-data-loss && next build"
+### 1. Create a D1 Database
+```bash
+npx wrangler d1 create snipurl-db
 ```
+Copy the `database_id` into your `wrangler.toml`.
+
+### 2. Apply Migrations
+```bash
+# Generate migration from schema
+npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0001_initial.sql
+
+# Apply to D1
+npx wrangler d1 migrations apply snipurl-db --remote
+```
+
+### 3. Deploy
+```bash
+npm run build
+npx wrangler pages deploy .next
+```
+
 
 ## 📄 License
 
