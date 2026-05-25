@@ -1,0 +1,9 @@
+name = "njmtech-snipurl"
+compatibility_date = "2024-04-17"
+pages_build_output_dir = ".next"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "njmtech-snipurl"
+database_id = "b55fa860-46ac-48f9-b82f-1ef54df3cb6b"
+migrations_dir = "prisma/migrations"
