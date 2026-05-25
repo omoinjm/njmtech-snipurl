@@ -1,5 +1,7 @@
 'use server';
 
+export const runtime = 'edge';
+
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 
