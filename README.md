@@ -8,8 +8,8 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 - **Instant Shortening:** Turn long, cumbersome URLs into short, shareable links.
 - **QR Code Generation:** Every shortened URL comes with a downloadable SVG QR code.
-- **Personal History:** Keep track of all the links you've shortened with a local-first history page.
-- **Visitor Tracking:** Anonymous tracking via `visitor_id` stored in local storage.
+- **Personal History:** Keep track of all the links you've shortened with visitor-based history backed by the database.
+- **Visitor Tracking:** Anonymous tracking via a `visitor_id` stored in local storage and used to look up your history.
 - **Modern Aesthetic:** A dark-themed, responsive UI built with Tailwind CSS 4 and shadcn/ui.
 - **Accessible:** Built with accessibility in mind, including keyboard navigation and skip links.
 
@@ -20,7 +20,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 - **Database:** [Cloudflare D1](https://developers.cloudflare.com/d1/) (SQLite) with [Prisma ORM](https://www.prisma.io/)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
 - **Icons:** [Radix UI Icons](https://icons.radix-ui.com/)
-- **Shortening:** [NanoID](https://github.com/ai/nanoid)
+- **Shortening:** In-repo `generateSlug()` helper (6-character random alphanumeric slug)
 - **QR Codes:** [qrcode.react](https://zpao.github.io/qrcode.react/)
 - **Notifications:** [Sonner](https://sonner.emilkowal.ski/)
 
@@ -35,7 +35,7 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/njmtech-snipurl.git
+   git clone https://github.com/omoinjm/njmtech-snipurl.git
    cd njmtech-snipurl
    ```
 
@@ -46,9 +46,11 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
 
 3. **Environment Setup:**
    Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory:
    ```env
    DATABASE_URL="file:./dev.db"
    ```
+   `NEXT_PUBLIC_BASE_URL` is optional. If unset, API responses fall back to the incoming request origin.
 
 4. **Database Setup (Local):**
    Generate the Prisma client and push the schema to your local SQLite database:
@@ -113,4 +115,4 @@ npx wrangler pages deploy .next
 
 ## 📄 License
 
-This project is open-source and available under the MIT License.
+This repository does not currently include a license file. Until a license is explicitly added, all rights are reserved.
