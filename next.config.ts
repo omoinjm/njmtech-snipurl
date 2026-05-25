@@ -1,15 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  webpack: (config, { isServer }) => {
-    // Some environments have issues with the default minifier worker
-    if (config.optimization && config.optimization.minimizer) {
-      config.optimization.minimizer.forEach((minimizer: any) => {
-        if (minimizer.options && minimizer.options.worker !== undefined) {
-          minimizer.options.worker = false;
-        }
-      });
-    }
+  // Disable minification to bypass the WebpackError: _webpack.WebpackError is not a constructor
+  // which is currently affecting Next.js 15 builds in some CI environments.
+  minimize: false,
+  webpack: (config) => {
+    config.optimization.minimize = false;
     return config;
   },
 };
