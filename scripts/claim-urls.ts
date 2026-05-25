@@ -59,13 +59,24 @@ async function main() {
     return;
   }
 
-  const { count } = await prisma.ma_visitor_map.createMany({
-    data: historyRows,
-    skipDuplicates: true,
-  });
+  let count = 0;
+  for (const row of historyRows) {
+    await prisma.ma_visitor_map.upsert({
+      where: {
+        visitor_id_short_url_id: {
+          visitor_id: row.visitor_id,
+          short_url_id: row.short_url_id,
+        },
+      },
+      create: row,
+      update: {},
+    });
+    count++;
+  }
 
   console.log(`✓ Added ${count} URL(s) to visitor "${visitorId}" history`);
-}
+  }
+
 
 main()
   .catch((e) => {
