@@ -1,6 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@prisma/adapter-d1"],
+  turbopack: {
+    resolveAlias: {
+      miniflare: "./.next-shims/noop.js",
+      undici: "./.next-shims/noop.js",
+      workerd: "./.next-shims/noop.js",
+      "stream/consumers": "./.next-shims/noop.js",
+      "util/types": "./.next-shims/noop.js",
+      "@cloudflare/workerd-linux-64": "./.next-shims/noop.js",
+    },
+    rules: {
+      "*.md": [],
+      "**/workerd": [],
+    },
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.resolve.fallback = {
@@ -28,6 +43,10 @@ const nextConfig: NextConfig = {
         ...config.resolve.alias,
         miniflare: false,
         undici: false,
+        workerd: false,
+        "@cloudflare/workerd-linux-64": false,
+        "stream/consumers": false,
+        "util/types": false,
       };
     }
     
@@ -36,3 +55,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+
+
