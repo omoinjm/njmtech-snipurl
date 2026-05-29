@@ -16,11 +16,37 @@ function createPrismaClient() {
 	}
 
 	// Fallback to default (local SQLite file)
+	// Note: This only works in Node.js environments
 	return new PrismaClient({
 		log: ['query'],
 	});
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+// Lazy initialization using a Proxy to avoid errors during build/Edge analysis
+// when D1 bindings are not yet available.
+let _prisma: PrismaClient | undefined;
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+function getPrisma(): PrismaClient {
+	if (globalForPrisma.prisma) {
+		return globalForPrisma.prisma;
+	}
+
+	if (!_prisma) {
+		_prisma = createPrismaClient();
+		if (process.env.NODE_ENV !== 'production') {
+			globalForPrisma.prisma = _prisma;
+		}
+	}
+	return _prisma;
+}
+
+export const prisma = new Proxy({} as PrismaClient, {
+	get(target, prop, receiver) {
+		const p = getPrisma();
+		const value = Reflect.get(p, prop, receiver);
+		if (typeof value === 'function') {
+			return value.bind(p);
+		}
+		return value;
+	},
+});
