@@ -44,6 +44,7 @@
     "prisma": "^6.6.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5",
+    "vercel": "^47.0.4",
     "wrangler": "^4.94.0"
   }
 }

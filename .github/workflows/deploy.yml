@@ -30,8 +30,11 @@ jobs:
         run: npx prisma generate
 
       - name: Build with next-on-pages
-        run: npx @cloudflare/next-on-pages
+        run: |
+          npx vercel build --prod
+          npx @cloudflare/next-on-pages --skip-build
         env:
+          VERCEL_SKIP_DEPENDENCY_INSTALL: "1"
           DATABASE_URL: "file:./dev.db"
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
           NPM_CONFIG_LEGACY_PEER_DEPS: true
