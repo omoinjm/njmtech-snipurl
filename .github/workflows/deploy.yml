@@ -35,7 +35,7 @@ jobs:
           DATABASE_URL: "file:./dev.db"
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
           NPM_CONFIG_LEGACY_PEER_DEPS: true
-          VERCEL_SKIP_DEPENDENCY_INSTALL: 1
+
 
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy .vercel/output --project-name=njmtech-snipurl
