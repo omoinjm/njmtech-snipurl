@@ -12,7 +12,7 @@ export async function parseJsonResponse<T>(response: Response): Promise<T | null
 
   try {
     return JSON.parse(body) as T;
-  } catch (err) {
+  } catch {
     const snippet = body.length > 50 ? `${body.slice(0, 50)}...` : body;
     const typeInfo = contentType ? ` (Content-Type: ${contentType})` : '';
     throw new Error(`The server returned an invalid response (Status: ${response.status})${typeInfo}: "${snippet}"`);

@@ -4,7 +4,7 @@ import { getLinkPreview } from '@/lib/link-preview';
 import { normalizeVisitorId } from '@/lib/url-ownership';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 const DEFAULT_PAGE_SIZE = 5;
 

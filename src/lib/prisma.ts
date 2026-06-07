@@ -24,6 +24,7 @@ function createPrismaClient() {
 	
 	if (isEdge) {
 		console.error('Prisma: Running in Edge runtime but D1 binding "DB" was not found.');
+		console.warn('Local SQLite files cannot be accessed in the Edge runtime. Please use "npm run pages:dev" to test with a local D1 database.');
 		// We don't throw here to avoid crashing at the top level, 
 		// but subsequent queries will fail with this client.
 	}

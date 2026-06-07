@@ -4,7 +4,7 @@ import { addShortUrlToVisitorHistory, normalizeVisitorId } from '@/lib/url-owner
 import { generateSlug } from '@/lib/utils';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 export async function POST(req: NextRequest) {
 	try {
