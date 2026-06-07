@@ -30,10 +30,15 @@ function createPrismaClient() {
 	const isEdge = process.env.NEXT_RUNTIME === 'edge';
 	
 	if (isEdge) {
-		throw new Error(
-			'Prisma: Running in Edge runtime but D1 binding "DB" was not found.\n' +
-			'Please ensure the D1 binding is configured in the Cloudflare Pages dashboard.'
-		);
+		const message = 'Prisma: Running in Edge runtime but D1 binding "DB" was not found.\n' +
+			'For local development, please use "npm run pages:dev" instead of "npm run dev".\n' +
+			'In production, ensure the D1 binding is configured in the Cloudflare Pages dashboard.';
+		
+		if (process.env.NODE_ENV === 'development') {
+			console.error(message);
+		}
+		
+		throw new Error(message);
 	}
 
 	// Fallback to default (local SQLite file)

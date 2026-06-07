@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:build": "npx @cloudflare/next-on-pages && node scripts/fix-edge-imports.mjs",
     "pages:dev": "npm run pages:build && npx wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat --d1=DB",
     "build": "next build",
     "start": "next start",
