@@ -8,7 +8,8 @@ export const runtime = 'edge';
 
 export async function POST(req: NextRequest) {
 	try {
-		const { url, visitor_id } = await req.json();
+		const body = await req.json() as { url?: string; visitor_id?: string };
+		const { url, visitor_id } = body;
 
 		if (!url) {
 			return NextResponse.json({ error: 'Missing URL' }, { status: 400 });

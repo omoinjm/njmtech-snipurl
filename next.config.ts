@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@prisma/adapter-d1"],
   turbopack: {
     resolveAlias: {
       miniflare: "./.next-shims/noop.js",
