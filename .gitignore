@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+Thumbs.db
 
 # debug
 npm-debug.log*
@@ -30,13 +31,36 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (secrets / local config)
 .env*
+!.env.example
+.dev.vars*
 
-# vercel
-.vercel
+# vercel / cloudflare build output
+.vercel/
+
+# wrangler local state (D1, cache, temp bundles)
+.wrangler/
+
+# local databases
+/prisma/dev.db
+/prisma/*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# platform-specific prisma native engines (regenerated via `npx prisma generate`)
+/src/generated/prisma/libquery_engine-*
+
+# local agent/tooling
+.agents/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

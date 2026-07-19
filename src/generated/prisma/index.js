@@ -130,7 +130,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/omoinjm/Documents/dev/github/projects/njmtech-snipurl/src/generated/prisma",
+      "value": "/home/omoinjm/dev/github/projects/njmtech-snipurl/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -146,7 +146,7 @@ const config = {
     "previewFeatures": [
       "driverAdapters"
     ],
-    "sourceFilePath": "/home/omoinjm/Documents/dev/github/projects/njmtech-snipurl/prisma/schema.prisma",
+    "sourceFilePath": "/home/omoinjm/dev/github/projects/njmtech-snipurl/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -159,6 +159,7 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

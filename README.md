@@ -59,12 +59,24 @@ A sleek, fast, and modern URL shortener built with Next.js 15, Prisma, and Tailw
    npx prisma db push
    ```
 
-5. **Run the development server:**
+5. **Apply D1 migrations (local):**
    ```bash
-   npm run dev
+   npx wrangler d1 migrations apply njmtech-snipurl --local
    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see SnipURL in action.
+6. **Run the development server:**
+   ```bash
+   npm run pages:dev
+   ```
+
+   SnipURL uses Cloudflare D1 and Edge API routes, so use `pages:dev` (Wrangler) rather than `npm run dev` (Next.js alone).
+
+Open [http://localhost:8788](http://localhost:8788) with your browser to see SnipURL in action.
+
+If port 8788 is already in use, stop the other Wrangler process first:
+```bash
+fuser -k 8788/tcp
+```
 
 ## 📜 Utility Scripts
 
