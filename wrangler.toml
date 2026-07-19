@@ -1,4 +1,5 @@
 name = "njmtech-snipurl"
+account_id = "e1ae684b84bfcd6aa3e7de3f913feb68"
 compatibility_date = "2024-04-17"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
@@ -6,5 +7,5 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "njmtech-snipurl"
-database_id = "b55fa860-46ac-48f9-b82f-1ef54df3cb6b"
+database_id = "3e6ac946-1f65-4f47-a8fd-0e00f7a74302"
 migrations_dir = "prisma/migrations"
