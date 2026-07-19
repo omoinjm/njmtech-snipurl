@@ -1,5 +1,5 @@
 name = "njmtech-snipurl"
-account_id = "c2db456075f9ab9579ff7bb76674a984"
+# account_id = "c2db456075f9ab9579ff7bb76674a984"
 compatibility_date = "2024-04-17"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
