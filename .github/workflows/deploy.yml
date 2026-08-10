@@ -35,6 +35,7 @@ jobs:
           echo '{"projectId":"_","orgId":"_","settings":{"framework":"nextjs"}}' > .vercel/project.json
           npx vercel build --prod
           npx @cloudflare/next-on-pages --skip-build
+          node scripts/fix-edge-imports.mjs
         env:
           VERCEL_SKIP_DEPENDENCY_INSTALL: "1"
           DATABASE_URL: "file:./dev.db"
